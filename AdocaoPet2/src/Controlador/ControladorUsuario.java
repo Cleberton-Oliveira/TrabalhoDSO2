@@ -7,6 +7,7 @@ import Entidade.Gato;
 import Entidade.Passaro;
 import Entidade.Usuario;
 import TelaUsuario.CriarUsuario;
+import TelaUsuario.EditarDados;
 import TelaUsuario.Login;
 import TelaUsuario.TelaUsuario;
 import java.util.ArrayList;
@@ -20,14 +21,15 @@ public class ControladorUsuario {
     private int usuarioLogado; 
     private Login login;
     private CriarUsuario criarUsuario;
+    private EditarDados editarDados;
     
     public ControladorUsuario(ControladorPrincipal ctrlPrincipal){
         this.ctrlPrincipal = ctrlPrincipal;
         this.telaUsuario = new TelaUsuario(this);
-    
         this.usuarios = new ArrayList<>();
         this.login =  new Login(this);
-       this.criarUsuario = new CriarUsuario(this);
+        this.criarUsuario = new CriarUsuario(this);
+        this.editarDados = new EditarDados(this);
         
     }
             
@@ -112,23 +114,12 @@ public class ControladorUsuario {
       usuario.setNome(nome);
       ctrlPrincipal.menu();
     }
-        
-    public void mudarCpf(String cpf){
-      for(Usuario usuarios: usuarios){
-            if(cpf.equals(usuarios.getCpf())){
-            telaUsuario.cpfNaoPodeMudar();
-            break;
-            }
-        }
-      Usuario usuario = usuarios.get(usuarioLogado);
-      usuario.setCpf(cpf);
-      ctrlPrincipal.menu();
-    }
     
     public void adocaoCachorro(Cachorro cachorro){
         Usuario usuario = usuarios.get(usuarioLogado);
         usuario.registroCachorro(cachorro);
     }
+    
     public void adocaoGato(Gato gato) {
         Usuario usuario = usuarios.get(usuarioLogado);
         usuario.registroGato(gato);
@@ -168,5 +159,9 @@ public class ControladorUsuario {
     public void iniciar() {
         login.fecha();
         ctrlPrincipal.iniciaPrograma();
+    }
+
+    public void editarDados() {
+        editarDados.exibe();
     }
 }

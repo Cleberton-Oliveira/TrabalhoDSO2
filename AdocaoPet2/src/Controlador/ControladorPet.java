@@ -1,18 +1,20 @@
 package Controlador;
 
+import TelaPet.DoarPet;
 import Entidade.Animal;
 import Entidade.ConteudoTelaPet;
 import Entidade.Cachorro;
 import Entidade.Gato;
 import Entidade.Passaro;
-import TelaPet.EscolhaPet;
+import TelaPet.AdotaPet;
 import TelaPet.TelaPets;
 import java.util.ArrayList;
 
 public class ControladorPet {
     private ControladorPrincipal ctrlPrincipal;
     private TelaPets telaPets;
-    private EscolhaPet escolhaPet;
+    private AdotaPet adotaPet;
+    private DoarPet doarPet;
     private ArrayList<Cachorro> cachorros;
     private ArrayList<Gato> gatos;
     private ArrayList<Passaro> passaros;
@@ -22,7 +24,8 @@ public class ControladorPet {
     public ControladorPet(ControladorPrincipal ctrlPrincipal){
         this.ctrlPrincipal = ctrlPrincipal;
         this.telaPets = new TelaPets(this);
-        this.escolhaPet = new EscolhaPet(this);
+        this.adotaPet = new AdotaPet(this);
+        this.doarPet = new DoarPet(this);
         this.cachorros = new ArrayList<>();
         this.gatos = new ArrayList<>();
         this.passaros = new ArrayList<>();
@@ -37,35 +40,17 @@ public class ControladorPet {
     public void addPassaro(Passaro passaro){
         passaros.add(passaro);
     }
-    
-    public void adotarPet(int opcao) {
-          switch(opcao){
-            case CACHORRO: 
-                telaPets.adotaDog();
-                break;
-            case GATO:
-                telaPets.adotaGato();
-                break;
-             case PASSARO:
-                telaPets.adotaPassaro();
-                break;    
-        }        
 
+    public void doarPet() {
+        doarPet.exibe();
     }
 
-//    public void doarPet(int opcao) {
-//                  switch(opcao){
-//            case CACHORRO: 
-//                telaPets.doarDog();
-//                break;
-//            case GATO:
-//                telaPets.doarGato();
-//                break;
-//             case PASSARO:
-//                telaPets.doarPassaro();
-//                break;    
-//        }
-//    }
+    public void adotaPet() {
+        adotaPet.exibe();
+    }
+
+
+    
 //    public void adocao(int pet, int opcaoRaca, int opcaoSexo) {
 //        ArrayList<ConteudoTelaPet> listagemPets = new ArrayList<ConteudoTelaPet>();
 //   
@@ -125,9 +110,7 @@ public class ControladorPet {
 //    
 //    
     
-    
-    
-    
+      
     private Cachorro desempacotaCachorro(ConteudoTelaPet conteudoTela) {
        return new Cachorro(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet);
     }
@@ -209,9 +192,5 @@ public class ControladorPet {
             }
         }
        menuPrincipal();
-    }
-
-    public void telaAdotaPet() {
-        escolhaPet.exibe();
     }
 }

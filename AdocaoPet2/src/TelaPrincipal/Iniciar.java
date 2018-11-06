@@ -63,8 +63,10 @@ public class Iniciar extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
      if(e.getSource().equals(btEntrar)){
-            ctrlPrincipal.executaOpcaoLogin(1);
+         fecha();   
+         ctrlPrincipal.executaOpcaoLogin(1);
         }else if(e.getSource().equals(btCriarConta)){
+            fecha();
             ctrlPrincipal.executaOpcaoLogin(2);
             
         }

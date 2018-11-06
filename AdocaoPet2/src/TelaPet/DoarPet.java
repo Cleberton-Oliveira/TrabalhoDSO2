@@ -14,20 +14,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Entidade.Cachorro;
 
-public class EscolhaPet extends JFrame implements ActionListener{
+public class DoarPet extends JFrame implements ActionListener{
     private ControladorPet ctrlPet;
     private JLabel lbTexto;
     private JButton btCachorro;
     private JButton btGato;
     private JButton btPassaro;
     private JButton btOk;
-   
-
-  
+     
 //    private JTextField tfNome;          
 //    private GerenciadorBotoes btManager;
     
-    public EscolhaPet(ControladorPet ctrlPet){
+    public DoarPet(ControladorPet ctrlPet){
        
        this.ctrlPet = ctrlPet; 
        tela();

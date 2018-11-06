@@ -46,10 +46,10 @@ public class ControladorPrincipal {
 
     public void executaOpcaoLogin(int opcao) {
         switch(opcao){
-                    case 1 : iniciar.fecha();
+                    case 1 : 
                         ctrlUsuario.fazerLoginTela();
                         break;
-                    case 2 : iniciar.fecha();
+                    case 2 : 
                         ctrlUsuario.fazerCadastroUsuario();
                         break;
         }
@@ -64,13 +64,9 @@ public class ControladorPrincipal {
 //      telaPrincipal.exibeTelaPrincipal();
 //    }
 
-    public void adotarPet(int opcao) {
-        ctrlPet.adotarPet(opcao);
-    }
 
-//    public void doarPet(int opcao) {
-//        ctrlPet.doarPet(opcao);
-//    }
+    
+   
 //    public void registroSucesso() {
 //        telaPrincipal.registroSucessoTela();
 //    }
@@ -84,10 +80,6 @@ public class ControladorPrincipal {
          ctrlUsuario.mudarNome(nome);
     }
 
-    public void mudaCpf(String cpf) {
-          ctrlUsuario.mudarCpf(cpf);
-    }
-    
     
     public void adocaoCachorro(Cachorro cachorro){
        ctrlUsuario.adocaoCachorro(cachorro);
@@ -117,14 +109,19 @@ public class ControladorPrincipal {
        return adocoes;
     }
 
-    public void apagaConta() {
-        menu.fecha();
+    public void apagaConta() {   
         ctrlUsuario.apagaConta();
     }
 
     public void adotaPet() {
-        menu.fecha();
-        ctrlPet.telaAdotaPet();
+        ctrlPet.adotaPet();
+    }
+     public void doarPet() {
+        ctrlPet.doarPet();
+    }
+
+    public void editarDados() {
+        ctrlUsuario.editarDados();
     }
     
 }

@@ -112,8 +112,10 @@ public class CriarUsuario extends JFrame implements ActionListener{
         conteudoTela.senhaUsuario = senha.getText();
         
         if(e.getSource().equals(btEnviar)){
+            fecha();
             ctrlUsuario.incluiUsuario(conteudoTela);
         }else if(e.getSource().equals(btSair)){
+            fecha();
             ctrlUsuario.iniciar();
         }
     }

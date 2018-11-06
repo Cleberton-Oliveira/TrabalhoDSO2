@@ -83,20 +83,26 @@ public class Menu extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
      if(e.getSource().equals(btAdotar)){
-            ctrlPrincipal.adotaPet();
+         fecha();   
+         ctrlPrincipal.adotaPet();
         }else if(e.getSource().equals(btDoar)){
-//            ctrlPrincipal.doaPet();
+            fecha();
+            ctrlPrincipal.doarPet();
             
         }else if(e.getSource().equals(btHistorico)){
+            fecha();
 //            ctrlPrincipal.historico();
             
         }else if(e.getSource().equals(btEditarDados)){
-//            ctrlPrincipal.editarDados();
+            fecha();
+            ctrlPrincipal.editarDados();
             
         }else if(e.getSource().equals(btSair)){
+            fecha();
             ctrlPrincipal.iniciaPrograma();
             
         }else if(e.getSource().equals(btApagarConta)){
+           fecha();
             ctrlPrincipal.apagaConta();            
         }
     }

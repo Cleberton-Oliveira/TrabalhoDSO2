@@ -39,8 +39,7 @@ public class Login extends JFrame implements ActionListener{
         c.gridx =0;
         c.gridy =0;
         container.add(texto, c);  
-         
-        
+                
         texto = new JLabel("CPF: ");
         c.gridx =0;
         c.gridy =1;
@@ -50,20 +49,16 @@ public class Login extends JFrame implements ActionListener{
         c.gridx =0;
         c.gridy =2;
         container.add(texto, c);  
-        
-        
-        cpf = new JTextField("Digite seu cpf");
+                
+        cpf = new JTextField("123");
         c.gridx =1;
         c.gridy =1;
         container.add(cpf, c); 
-        
-           
-        senha = new JPasswordField("Digite sua senha");
+                   
+        senha = new JPasswordField("123");
         c.gridx =1;
         c.gridy =2;
-        container.add(senha, c); 
-      
-        
+        container.add(senha, c);
         
         btSair = new JButton("Sair");
         c.gridx = 0;
@@ -92,12 +87,12 @@ public class Login extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        login = cpf.getText() +  senha.getText();
-//       
-        
+        String login = cpf.getText() +  senha.getText();          
         if(e.getSource().equals(btEntrar)){
-            ctrlUsuario.logar("12312");
+            fecha();
+            ctrlUsuario.logar(login);
         }else if(e.getSource().equals(btSair)){
+            fecha();
             ctrlUsuario.iniciar();
         }
     }
