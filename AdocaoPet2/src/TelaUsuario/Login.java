@@ -92,8 +92,11 @@ public class Login extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+//        login = cpf.getText() +  senha.getText();
+//       
+        
         if(e.getSource().equals(btEntrar)){
-            ctrlUsuario.logar("123123");
+            ctrlUsuario.logar("12312");
         }else if(e.getSource().equals(btSair)){
             ctrlUsuario.iniciar();
         }

@@ -41,13 +41,14 @@ public class ControladorUsuario {
 
 
     public void logar(String loginUsuario) {
+        
         for(Usuario usuario: usuarios){
             String loginDeUsuarios = usuario.getLogin();
             if(loginDeUsuarios.equals(loginUsuario)){
                 usuarioLogado = usuarios.lastIndexOf(usuario);
                     login.fecha();
                     ctrlPrincipal.menu();
-                break;
+                return;
             }
         }
         login.fecha();
@@ -56,6 +57,7 @@ public class ControladorUsuario {
     
     public void addUsuario(Usuario usuario){
         usuarios.add(usuario);
+        usuario.eSuperUser();
     }
     
     public void incluiUsuario(ConteudoTelaUsuario conteudoTela) {
@@ -64,7 +66,7 @@ public class ControladorUsuario {
             if(cpf.equals(usuario.getCpf())){
                 criarUsuario.fecha();
                 criarUsuario.erro();
-                break;
+                return;
             }
         }
         Usuario usuario = desempacota(conteudoTela);
@@ -85,7 +87,7 @@ public class ControladorUsuario {
     public void historicoUsuario(){
         Usuario usuario = usuarios.get(usuarioLogado);
         String nome = usuario.getNome();
-        if(usuario.getCpf().equals("123")){
+        if(usuario.getSuperuser() == true){
             ArrayList<Animal> adocao = usuario.getAdocao();
             ArrayList<Animal> doacao = usuario.getDoacao();
             telaUsuario.historicoSuperUsuario(nome, adocao, doacao, usuarios);

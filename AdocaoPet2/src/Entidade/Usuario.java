@@ -7,6 +7,7 @@ public class Usuario {
     private String cpf;
     private String senha;
     private String login;
+    private boolean superuser;
     private ArrayList<Animal> adocao;
     private ArrayList<Animal> doacao;
 
@@ -17,8 +18,13 @@ public class Usuario {
         this.cpf = cpf;
         this.senha = senha;
         this.login = cpf+senha; 
+        this.superuser = false;
         this.adocao = new ArrayList<>();
         this.doacao = new ArrayList<>();
+    }
+
+    public boolean getSuperuser() {
+        return superuser;
     }
 
     public String getNome() {
@@ -30,6 +36,9 @@ public class Usuario {
     }
     public String getCpf() {
         return cpf;
+    }
+    public void eSuperUser(){
+        this.superuser = true;
     }
 
     public void setCpf(String cpf) {

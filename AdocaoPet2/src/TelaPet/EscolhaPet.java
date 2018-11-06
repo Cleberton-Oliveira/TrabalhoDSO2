@@ -28,6 +28,7 @@ public class EscolhaPet extends JFrame implements ActionListener{
 //    private GerenciadorBotoes btManager;
     
     public EscolhaPet(ControladorPet ctrlPet){
+       
        this.ctrlPet = ctrlPet; 
        tela();
     } 
@@ -73,18 +74,17 @@ public class EscolhaPet extends JFrame implements ActionListener{
 
         String[] petStrings = {};
 
-        JComboBox racaCachorro = new JComboBox(petStrings);
+        JComboBox racaCachorro = new JComboBox(Cachorro.RACACACHORRO.values());
         racaCachorro = new JComboBox();
-        c.gridx = 0;
+        c.gridx = 1;
         c.gridy = 1;
         racaCachorro.addActionListener(this);
         container.add(racaCachorro, c);
         
-        btOk = new JButton("Qual a raca?");
-        c.gridx = 1;
+        lbTexto = new JLabel("Qual a raca?");
+        c.gridx = 0;
         c.gridy = 1;
-        btOk.addActionListener(this);
-        container.add(btOk, c);
+        container.add(lbTexto, c);
         
         setSize(460, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
