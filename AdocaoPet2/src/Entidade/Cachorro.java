@@ -4,24 +4,21 @@ import java.util.EnumSet;
 
 
 public class Cachorro extends Animal{
-      private int  raca; 
-
+    private int  raca;
     
     public enum RACACACHORRO  {
-        PASTOR_ALEMAO("PASTOR_ALEMAO"),
-        LABRADOR("LABRADOR"),
-        BULDOGLE("BULDOGLE"),
-        BEAGLE("BEAGLE"),
-        POODLE("POODLE");  
-        
-        public final String mensagem;
-        
-         
-        RACACACHORRO(String raca){
-            mensagem = raca;
-        }
+        PASTOR_ALEMAO(1),
+        LABRADOR(2),
+        BULDOGLE(3),
+        BEAGLE(4),
+        POODLE(5);  
         
         
+        public final int id;
+        
+        RACACACHORRO(int idRacaCachorro){
+            id = idRacaCachorro;
+        }     
         
     }
     
