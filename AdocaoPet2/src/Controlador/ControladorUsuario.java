@@ -6,6 +6,7 @@ import Entidade.ConteudoTelaUsuario;
 import Entidade.Gato;
 import Entidade.Passaro;
 import Entidade.Usuario;
+import Mapeadores.MapeadorUsuario;
 import TelaUsuario.CriarUsuario;
 import TelaUsuario.EditarDados;
 import TelaUsuario.Login;
@@ -15,23 +16,25 @@ import javax.swing.JOptionPane;
 
 
 public class ControladorUsuario {
-    private ControladorPrincipal ctrlPrincipal;
-    private TelaUsuario telaUsuario;
-    private ArrayList<Usuario> usuarios;
-    private int usuarioLogado; 
-    private Login login;
-    private CriarUsuario criarUsuario;
-    private EditarDados editarDados;
-    
-    public ControladorUsuario(ControladorPrincipal ctrlPrincipal){
-        this.ctrlPrincipal = ctrlPrincipal;
-        this.telaUsuario = new TelaUsuario(this);
-        this.usuarios = new ArrayList<>();
-        this.login =  new Login(this);
-        this.criarUsuario = new CriarUsuario(this);
-        this.editarDados = new EditarDados(this);
-        
-    }
+
+	private MapeadorUsuario mapeador;
+	private ControladorPrincipal ctrlPrincipal;
+	private TelaUsuario telaUsuario;
+	private String cpfLogado;
+	private Login login;
+	private CriarUsuario criarUsuario;
+        private EditarDados editarDados;
+
+	public ControladorUsuario(ControladorPrincipal ctrlPrincipal) {
+		this.mapeador = new MapeadorUsuario();
+		this.ctrlPrincipal = ctrlPrincipal;
+		this.telaUsuario = new TelaUsuario(this);
+		this.login = new Login(this);
+		this.criarUsuario = new CriarUsuario(this);
+                this.editarDados = new EditarDados(this);
+
+	}
+
             
     public void fazerLoginTela() {
         login.exibe();
@@ -44,12 +47,13 @@ public class ControladorUsuario {
 
     public void logar(String loginUsuario) {
         
-        for(Usuario usuario: usuarios){
+        for(Usuario usuario: mapeador.getList()){
             String loginDeUsuarios = usuario.getLogin();
             if(loginDeUsuarios.equals(loginUsuario)){
-                usuarioLogado = usuarios.lastIndexOf(usuario);
-                    login.fecha();
-                    ctrlPrincipal.menu();
+                   cpfLogado = loginUsuario.substring(0, 3);
+                   System.out.println(cpfLogado);
+                   login.fecha();
+                   ctrlPrincipal.menu();
                 return;
             }
         }
@@ -58,13 +62,13 @@ public class ControladorUsuario {
     }
     
     public void addUsuario(Usuario usuario){
-        usuarios.add(usuario);
+        mapeador.put(usuario);
         usuario.eSuperUser();
     }
     
     public void incluiUsuario(ConteudoTelaUsuario conteudoTela) {
         String cpf = conteudoTela.cpfUsuario;
-        for(Usuario usuario: usuarios){
+        for(Usuario usuario: mapeador.getList()){
             if(cpf.equals(usuario.getCpf())){
                 criarUsuario.fecha();
                 criarUsuario.erro();
@@ -72,7 +76,7 @@ public class ControladorUsuario {
             }
         }
         Usuario usuario = desempacota(conteudoTela);
-        usuarios.add(usuario);
+        mapeador.put(usuario);
         criarUsuario.fecha();
         login.contaCriadaComSucesso();
                 
@@ -87,12 +91,13 @@ public class ControladorUsuario {
     }
 
     public void historicoUsuario(){
-        Usuario usuario = usuarios.get(usuarioLogado);
+        Usuario usuario = mapeador.getUsuario(cpfLogado);
         String nome = usuario.getNome();
+        
         if(usuario.getSuperuser() == true){
             ArrayList<Animal> adocao = usuario.getAdocao();
             ArrayList<Animal> doacao = usuario.getDoacao();
-            telaUsuario.historicoSuperUsuario(nome, adocao, doacao, usuarios);
+            telaUsuario.historicoSuperUsuario(nome, adocao, doacao, mapeador.getList());
         }else{
         ArrayList<Animal> adocao = usuario.getAdocao();
         ArrayList<Animal> doacao = usuario.getDoacao();        
@@ -104,55 +109,55 @@ public class ControladorUsuario {
     }
     
     public void mudarSenha(String senha){
-        Usuario usuario = usuarios.get(usuarioLogado);
+        Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.setSenha(senha);
         ctrlPrincipal.menu();
     }
     
     public void mudarNome(String nome){
-      Usuario usuario = usuarios.get(usuarioLogado);
+      Usuario usuario = mapeador.getUsuario(cpfLogado);
       usuario.setNome(nome);
       ctrlPrincipal.menu();
     }
     
     public void adocaoCachorro(Cachorro cachorro){
-        Usuario usuario = usuarios.get(usuarioLogado);
+        Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.registroCachorro(cachorro);
     }
     
     public void adocaoGato(Gato gato) {
-        Usuario usuario = usuarios.get(usuarioLogado);
+        Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.registroGato(gato);
     }
 
     public void adocaoPassaro(Passaro passaro) {
-         Usuario usuario = usuarios.get(usuarioLogado);
+         Usuario usuario = mapeador.getUsuario(cpfLogado);
             usuario.registroPassaro(passaro);    
     }
 
     public void doaCachorro(Cachorro cachorro) {
-        Usuario usuario = usuarios.get(usuarioLogado);
+        Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.doaCachorro(cachorro);
     }
 
     public void doaGato(Gato gato) {
-        Usuario usuario = usuarios.get(usuarioLogado);
+        Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.doaGato(gato);
     }
 
     public void doaPassaro(Passaro passaro) {
-        Usuario usuario = usuarios.get(usuarioLogado);
+        Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.doaPassaro(passaro);
     }
    
     public ArrayList<Animal> enviaListaAdocao(){
-        Usuario usuario = usuarios.get(usuarioLogado);    
+        Usuario usuario = mapeador.getUsuario(cpfLogado);  
         return usuario.getAdocao();
     }
 
     public void apagaConta(){
-    Usuario usuario = usuarios.get(usuarioLogado);
-    usuarios.remove(usuario);
+    Usuario usuario = mapeador.getUsuario(cpfLogado);
+    mapeador.remove(usuario);
     ctrlPrincipal.iniciaPrograma();
     }  
 

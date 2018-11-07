@@ -1,8 +1,9 @@
 package Entidade;
 
+import Interfaces.IUsuario;
 import java.util.ArrayList;
 
-public class Usuario {
+public class Usuario implements IUsuario{
     private String nome;
     private String cpf;
     private String senha;
@@ -27,6 +28,7 @@ public class Usuario {
         return superuser;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
@@ -34,6 +36,7 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    @Override
     public String getCpf() {
         return cpf;
     }
@@ -46,6 +49,7 @@ public class Usuario {
         this.login = cpf+getSenha();
     }
 
+    @Override
     public String getSenha() {
         return senha;
     }
@@ -55,6 +59,7 @@ public class Usuario {
         this.login = getCpf()+senha;
     }
 
+    @Override
     public String getLogin() {
         return login;
     }
@@ -79,10 +84,12 @@ public class Usuario {
         this.doacao.add(passaro);
     }
 
+    @Override
     public ArrayList<Animal> getAdocao() {
         return adocao;
     }
     
+    @Override
      public ArrayList<Animal> getDoacao() {
         return doacao;
     }

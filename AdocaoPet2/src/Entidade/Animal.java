@@ -1,7 +1,9 @@
 
 package Entidade;
 
-public abstract class Animal {
+import Interfaces.IAnimal;
+
+public abstract class Animal implements IAnimal {
     
     String nome;
     int sexo;
@@ -14,17 +16,21 @@ public abstract class Animal {
         this.idade = idade;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
+    @Override
     public int getIdade(){
         return idade;
     }
+    @Override
     public int getSexo(){
         return sexo;
     }
     
     
+    @Override
     public String getNomeSexo(int sexo){
         if(sexo == 1){
             return "Masculino";
