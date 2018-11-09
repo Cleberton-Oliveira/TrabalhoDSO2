@@ -23,7 +23,6 @@ public class ControladorPet {
     private MapeadorCachorro mapeadorCachorro;
     private MapeadorGato mapeadorGato;
     private MapeadorPassaro mapeadorPassaro;
-    private int idAnimal;
     
     private final int CACHORRO=1,GATO=2, PASSARO=3;
         
@@ -91,6 +90,8 @@ public class ControladorPet {
     
 
     public void cadastroDog(ConteudoTelaPet conteudoTela) {
+        conteudoTela.identificador = Integer.toString(mapeadorCachorro.getList().size() + 1);
+        System.out.println("O indentificador do cachorro é: cachorro" + conteudoTela.identificador);
         Cachorro cachorro = desempacotaCachorro(conteudoTela);
         mapeadorCachorro.put(cachorro);
         ctrlPrincipal.doaCachorro(cachorro);
@@ -98,6 +99,8 @@ public class ControladorPet {
     }
 
     public void cadastroGato(ConteudoTelaPet conteudoTela) {
+        conteudoTela.identificador = Integer.toString(mapeadorGato.getList().size() + 1);
+        System.out.println("O indentificador do gato é: gato" + conteudoTela.identificador);
         Gato gato = desempacotaGato(conteudoTela);
         mapeadorGato.put(gato);
         ctrlPrincipal.doaGato(gato);   
@@ -105,6 +108,8 @@ public class ControladorPet {
     }
 
     public void cadastroPassaro(ConteudoTelaPet conteudoTela) {
+        conteudoTela.identificador = Integer.toString(mapeadorPassaro.getList().size() + 1);
+        System.out.println("O indentificador do passaro é: passaro" + conteudoTela.identificador);
         Passaro passaro = desempacotaPassaro(conteudoTela);
         mapeadorPassaro.put(passaro);
         ctrlPrincipal.doaPassaro(passaro);  
@@ -115,18 +120,12 @@ public class ControladorPet {
     
       
     private Cachorro desempacotaCachorro(ConteudoTelaPet conteudoTela) {
-      int id = idAnimal ++;   
-      conteudoTela.identificador = Integer.toString(id);
       return new Cachorro(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet, conteudoTela.identificador);
     }
     private Gato desempacotaGato(ConteudoTelaPet conteudoTela) {
-       int id = idAnimal ++;   
-      conteudoTela.identificador = Integer.toString(id); 
       return new Gato(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet, conteudoTela.identificador);
     }
     private Passaro desempacotaPassaro(ConteudoTelaPet conteudoTela) {
-      int id = idAnimal ++;   
-      conteudoTela.identificador = Integer.toString(id); 
       return new Passaro(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet, conteudoTela.identificador);
     }
     
