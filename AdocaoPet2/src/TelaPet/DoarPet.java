@@ -17,6 +17,8 @@ import Entidade.Gato;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import Entidade.ConteudoTelaPet;
+import java.lang.NumberFormatException;
+
 
 public class DoarPet extends JFrame implements ActionListener{
     private ControladorPet ctrlPet;
@@ -311,11 +313,17 @@ public class DoarPet extends JFrame implements ActionListener{
             ConteudoTelaPet conteudoTela = new ConteudoTelaPet();
                 conteudoTela.racaPet = raca.getSelectedIndex() + 1;
                 conteudoTela.sexoPet = sexo.getSelectedIndex() + 1;
-                conteudoTela.nomePet = nome.getText();
-                int id = Integer.parseInt(idade.getText());
-                conteudoTela.idadePet = id;
+                conteudoTela.nomePet = nome.getText();           
+                try {  
+                    int id = Integer.parseInt(idade.getText());
+                    conteudoTela.idadePet = id;
+                }catch (NumberFormatException erro) {
+                    System.out.println("Digite uma opção válida!" + erro.getMessage());
+                    JOptionPane.showMessageDialog(null,"Valor Invalido\n Digite um valor inteiro para idade");
+                    return;    
+                }                   
             
-                switch(animal){
+        switch(animal){
             case 1: 
                 ctrlPet.cadastroDog(conteudoTela);
                 fecha();
@@ -331,7 +339,8 @@ public class DoarPet extends JFrame implements ActionListener{
                 fecha();
                 JOptionPane.showMessageDialog(null,"PARABÉNS\n Passaro doado com sucesso.");
                 break;    
-            }        
+        }        
+       
        }else if(e.getSource().equals(btCancel)){
            fecha();
            ctrlPet.menuPrincipal();    

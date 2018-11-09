@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
+
 public class TelaPets {
     private ControladorPet ctrlPet;
     private Scanner teclado;
@@ -22,7 +24,7 @@ public class TelaPets {
            int inteiro = teclado.nextInt();
             teclado.nextLine();
             return inteiro;
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException e) {
             System.out.println("Digite uma opção válida!" + e.getMessage());
             return 0;
         }        
