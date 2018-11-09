@@ -58,11 +58,10 @@ public class ControladorPrincipal {
     public void menu(){
         menu.exibe();
     }
-//
-//    public void historico(){
-//      ctrlUsuario.historicoUsuario();
-//      telaPrincipal.exibeTelaPrincipal();
-//    }
+
+    public void historico(){
+      ctrlUsuario.historicoUsuario();
+    }
 
 
     

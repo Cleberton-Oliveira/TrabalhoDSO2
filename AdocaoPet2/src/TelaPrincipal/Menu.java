@@ -91,7 +91,7 @@ public class Menu extends JFrame implements ActionListener{
             
         }else if(e.getSource().equals(btHistorico)){
             fecha();
-//            ctrlPrincipal.historico();
+            ctrlPrincipal.historico();
             
         }else if(e.getSource().equals(btEditarDados)){
             fecha();
