@@ -1,9 +1,10 @@
 package Entidade;
 
+import java.io.Serializable;
 import java.util.EnumSet;
 
 
-public class Cachorro extends Animal{
+public class Cachorro extends Animal implements Serializable{
     private String identificadorCachorro;
     private int  raca;
     

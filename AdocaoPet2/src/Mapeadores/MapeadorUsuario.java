@@ -13,27 +13,27 @@ import java.util.ArrayList;
 
 public class MapeadorUsuario {
 
-	private HashMap<String, Usuario> usuarios = new HashMap<>();
-	private final String fileName = "arquivos.Usuario";
+    private HashMap<String, Usuario> usuarios = new HashMap<>();
+    private final String fileName = "arquivos.Usuario";
 
-	public MapeadorUsuario() {
-		load();
-	}
+    public MapeadorUsuario() {
+        load();
+    }
 
-	public Usuario getUsuario(String cpf) {
-		return usuarios.get(cpf);
-	}
+    public Usuario getUsuario(String cpf) {
+        return usuarios.get(cpf);
+    }
 
-	public void put(Usuario usuario) {
-		usuarios.put(usuario.getCpf(), usuario);
-		persist();
-	}
+    public void put(Usuario usuario) {
+        usuarios.put(usuario.getCpf(), usuario);
+        persist();
+    }
 
-	public ArrayList<Usuario> getList() {
-		return new ArrayList(usuarios.values());
-	}
+    public ArrayList<Usuario> getList() {
+        return new ArrayList(usuarios.values());
+    }
 
-	public void persist() {
+    public void persist() {
 
         try {
 
@@ -42,6 +42,8 @@ public class MapeadorUsuario {
             oIS.writeObject(usuarios);
             oIS.flush();
             fout.flush();
+            oIS.close();
+            fout.close();
 
         } catch (FileNotFoundException ex) {
 
@@ -52,36 +54,40 @@ public class MapeadorUsuario {
             System.out.println("PROBLEMA NA EXECUCAO DO PROGRAMA");
 
         }
-	}
-	   public void load() {
- 
-		try {
+    }
 
-			FileInputStream fIS = new FileInputStream(fileName);
-			ObjectInputStream oIPS = new ObjectInputStream(fIS);
+    public void load() {
 
-			this.usuarios = (HashMap<String, Usuario>) oIPS.readObject();
+        try {
 
-			oIPS.close();
-			fIS.close();
+            FileInputStream fIS = new FileInputStream(fileName);
+            ObjectInputStream oIPS = new ObjectInputStream(fIS);
 
-		} catch (ClassNotFoundException ex) {
+            this.usuarios = (HashMap<String, Usuario>) oIPS.readObject();
 
-			System.out.println("ARQUIVO NAO ENCONTRADO !!");
+            oIPS.close();
+            fIS.close();
 
-		} catch (IOException e) {
+        } catch (ClassNotFoundException ex) {
 
-			System.out.println("# ERROR # ");
-		}
-	}
+            System.out.println("ARQUIVO NAO ENCONTRADO !!");
 
+        } catch (FileNotFoundException ex) {
 
+            System.out.println("ARQUIVO NAO ENCONTRADO!!!");
 
-	public void remove(Usuario usuario) {
+        } catch (IOException e) {
 
-		usuarios.remove(usuario.getCpf());
-		
-		persist();
-	}
+            System.out.println("# ERROR # ");
+            persist();
+        }
+    }
+
+    public void remove(Usuario usuario) {
+
+        usuarios.remove(usuario.getCpf());
+
+        persist();
+    }
 
 }

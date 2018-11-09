@@ -35,10 +35,14 @@ public class ControladorUsuario {
 	}
             
     public void fazerLoginTela() {
+        login.fecha();
+        login = new Login(this);
         login.exibe();
     }
 
     public void fazerCadastroUsuario() {
+        criarUsuario.fecha();
+        criarUsuario = new CriarUsuario(this);
         criarUsuario.exibe();
     }
 
@@ -55,7 +59,6 @@ public class ControladorUsuario {
                 return;
             }
         }
-        login.fecha();
         login.erroLogin();
     }
     
@@ -164,11 +167,12 @@ public class ControladorUsuario {
     }  
 
     public void iniciar() {
-        login.fecha();
         ctrlPrincipal.iniciaPrograma();
     }
 
     public void editarDados() {
+        editarDados.fecha();
+        editarDados = new EditarDados(this);
         editarDados.exibe();
     }
 }

@@ -41,6 +41,11 @@ public class DoarPet extends JFrame implements ActionListener{
        this.ctrlPet = ctrlPet; 
        tela();
     } 
+    public DoarPet(int tipo,ControladorPet ctrlPet){
+       
+       this.ctrlPet = ctrlPet; 
+       tela();
+    } 
 
     public void tela(){
         Container container = getContentPane();

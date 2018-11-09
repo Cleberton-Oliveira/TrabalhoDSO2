@@ -27,8 +27,7 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
     
     private int valorPet;
     
-    public ListaParaAdocao(ControladorPet ctrlPet){
-       
+    public ListaParaAdocao(ControladorPet ctrlPet){    
        this.ctrlPet = ctrlPet; 
      } 
     

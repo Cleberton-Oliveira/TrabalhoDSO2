@@ -11,29 +11,29 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class MapeadorPassaro{
+public class MapeadorPassaro {
 
-	private HashMap<String, Passaro> passaros = new HashMap<>();
-	private final String fileName = "arquivos.Passaro";
+    private HashMap<String, Passaro> passaros = new HashMap<>();
+    private final String fileName = "arquivos.Passaro";
 
-	public MapeadorPassaro() {
-		load();
-	}
+    public MapeadorPassaro() {
+        load();
+    }
 
-	public Passaro getUsuario(String identificadorPassaro) {
-		return passaros.get(identificadorPassaro);
-	}
+    public Passaro getUsuario(String identificadorPassaro) {
+        return passaros.get(identificadorPassaro);
+    }
 
-	public void put(Passaro passaro) {
-		passaros.put(passaro.getIdentificadorPassaro(), passaro);
-		persist();
-	}
+    public void put(Passaro passaro) {
+        passaros.put(passaro.getIdentificadorPassaro(), passaro);
+        persist();
+    }
 
-	public ArrayList<Passaro> getList() {
-		return new ArrayList(passaros.values());
-	}
+    public ArrayList<Passaro> getList() {
+        return new ArrayList(passaros.values());
+    }
 
-	public void persist() {
+    public void persist() {
 
         try {
 
@@ -42,6 +42,8 @@ public class MapeadorPassaro{
             oIS.writeObject(passaros);
             oIS.flush();
             fout.flush();
+            oIS.close();
+            fout.close();
 
         } catch (FileNotFoundException ex) {
 
@@ -52,34 +54,38 @@ public class MapeadorPassaro{
             System.out.println("PROBLEMA NA EXECUCAO DO PROGRAMA");
 
         }
-	}
-	   public void load() {
- 
-		try {
+    }
 
-			FileInputStream fIS = new FileInputStream(fileName);
-			ObjectInputStream oIPS = new ObjectInputStream(fIS);
+    public void load() {
 
-			this.passaros = (HashMap<String, Passaro>) oIPS.readObject();
+        try {
 
-			oIPS.close();
-			fIS.close();
+            FileInputStream fIS = new FileInputStream(fileName);
+            ObjectInputStream oIPS = new ObjectInputStream(fIS);
 
-		} catch (ClassNotFoundException ex) {
+            this.passaros = (HashMap<String, Passaro>) oIPS.readObject();
 
-			System.out.println("ARQUIVO NAO ENCONTRADO !!");
+            oIPS.close();
+            fIS.close();
 
-		} catch (IOException e) {
+        } catch (ClassNotFoundException ex) {
 
-			System.out.println("# ERROR # ");
-		}
-	}
+            System.out.println("ARQUIVO NAO ENCONTRADO !!");
 
+        } catch (FileNotFoundException ex) {
 
+            System.out.println("ARQUIVO NAO ENCONTRADO!!!");
 
-	public void remove(Passaro passaro) {
-            passaros.remove(passaro.getIdentificadorPassaro());
-	    persist();
-	}
+        } catch (IOException e) {
+
+            System.out.println("# ERROR # ");
+            persist();
+        }
+    }
+
+    public void remove(Passaro passaro) {
+        passaros.remove(passaro.getIdentificadorPassaro());
+        persist();
+    }
 
 }

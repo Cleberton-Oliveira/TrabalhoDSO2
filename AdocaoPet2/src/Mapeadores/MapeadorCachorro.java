@@ -11,29 +11,29 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class MapeadorCachorro{
+public class MapeadorCachorro {
 
-	private HashMap<String, Cachorro> cachorros = new HashMap<>();
-	private final String fileName = "arquivos.Cachorro";
+    private HashMap<String, Cachorro> cachorros = new HashMap<>();
+    private final String fileName = "arquivos.Cachorro";
 
-	public MapeadorCachorro() {
-		load();
-	}
+    public MapeadorCachorro() {
+        load();
+    }
 
-	public Cachorro getUsuario(String identificadorCachorro) {
-		return cachorros.get(identificadorCachorro);
-	}
+    public Cachorro getUsuario(String identificadorCachorro) {
+        return cachorros.get(identificadorCachorro);
+    }
 
-	public void put(Cachorro cachorro) {
-		cachorros.put(cachorro.getIdentificadorCachorro(), cachorro);
-		persist();
-	}
+    public void put(Cachorro cachorro) {
+        cachorros.put(cachorro.getIdentificadorCachorro(), cachorro);
+        persist();
+    }
 
-	public ArrayList<Cachorro> getList() {
-		return new ArrayList(cachorros.values());
-	}
+    public ArrayList<Cachorro> getList() {
+        return new ArrayList(cachorros.values());
+    }
 
-	public void persist() {
+    public void persist() {
 
         try {
 
@@ -42,6 +42,8 @@ public class MapeadorCachorro{
             oIS.writeObject(cachorros);
             oIS.flush();
             fout.flush();
+            oIS.close();
+            fout.close();
 
         } catch (FileNotFoundException ex) {
 
@@ -52,34 +54,38 @@ public class MapeadorCachorro{
             System.out.println("PROBLEMA NA EXECUCAO DO PROGRAMA");
 
         }
-	}
-	   public void load() {
- 
-		try {
+    }
 
-			FileInputStream fIS = new FileInputStream(fileName);
-			ObjectInputStream oIPS = new ObjectInputStream(fIS);
+    public void load() {
 
-			this.cachorros = (HashMap<String, Cachorro>) oIPS.readObject();
+        try {
 
-			oIPS.close();
-			fIS.close();
+            FileInputStream fIS = new FileInputStream(fileName);
+            ObjectInputStream oIPS = new ObjectInputStream(fIS);
 
-		} catch (ClassNotFoundException ex) {
+            this.cachorros = (HashMap<String, Cachorro>) oIPS.readObject();
 
-			System.out.println("ARQUIVO NAO ENCONTRADO !!");
+            oIPS.close();
+            fIS.close();
 
-		} catch (IOException e) {
+        } catch (ClassNotFoundException ex) {
 
-			System.out.println("# ERROR # ");
-		}
-	}
+            System.out.println("ARQUIVO NAO ENCONTRADO !!");
 
+        } catch (FileNotFoundException ex) {
 
+            System.out.println("ARQUIVO NAO ENCONTRADO!!!");
 
-	public void remove(Cachorro cachorro) {
-            cachorros.remove(cachorro.getIdentificadorCachorro());
-	    persist();
-	}
+        } catch (IOException e) {
+
+            System.out.println("# ERROR # ");
+            persist();
+        }
+    }
+
+    public void remove(Cachorro cachorro) {
+        cachorros.remove(cachorro.getIdentificadorCachorro());
+        persist();
+    }
 
 }

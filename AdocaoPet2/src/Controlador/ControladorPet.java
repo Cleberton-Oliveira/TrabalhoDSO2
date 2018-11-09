@@ -49,10 +49,14 @@ public class ControladorPet {
     //----------------------------------------------------------------------------
     
     public void doarPet() {
+        doarPet.fecha();
+        doarPet = new DoarPet(this);
         doarPet.exibe();
     }
 
     public void adotaPet() {
+        adotaPet.fecha();
+        adotaPet = new AdotaPet(this);
         adotaPet.exibe();
     }
     
@@ -65,6 +69,8 @@ public class ControladorPet {
                        listagemPets.add(empacotaCachorro(cachorro));
                     }
                 }
+                listaParaAdocao.fecha();
+                listaParaAdocao = new ListaParaAdocao(this);
                 listaParaAdocao.listagem(CACHORRO, listagemPets);
                 break;
             case GATO:
@@ -73,6 +79,8 @@ public class ControladorPet {
                        listagemPets.add(empacotaGato(gato));
                     }
                 }
+                listaParaAdocao.fecha();
+                listaParaAdocao = new ListaParaAdocao(this);
                 listaParaAdocao.listagem(GATO, listagemPets);
                 break;
              case PASSARO:
@@ -81,6 +89,8 @@ public class ControladorPet {
                        listagemPets.add(empacotaPassaro(passaro));
                     }
                 }
+                listaParaAdocao.fecha();
+                listaParaAdocao = new ListaParaAdocao(this);
                 listaParaAdocao.listagem(PASSARO, listagemPets);
                 break; 
         

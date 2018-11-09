@@ -1,7 +1,9 @@
 package Entidade;
 
+import java.io.Serializable;
 
-public class Passaro extends Animal{
+
+public class Passaro extends Animal implements Serializable{
       private int  raca;
       private String identificadorPassaro;
       

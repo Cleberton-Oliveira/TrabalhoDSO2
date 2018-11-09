@@ -11,29 +11,29 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class MapeadorGato{
+public class MapeadorGato {
 
-	private HashMap<String, Gato> gatos = new HashMap<>();
-	private final String fileName = "arquivos.Gato";
+    private HashMap<String, Gato> gatos = new HashMap<>();
+    private final String fileName = "arquivos.Gato";
 
-	public MapeadorGato() {
-		load();
-	}
+    public MapeadorGato() {
+        load();
+    }
 
-	public Gato getUsuario(String identificadorGato) {
-		return gatos.get(identificadorGato);
-	}
+    public Gato getUsuario(String identificadorGato) {
+        return gatos.get(identificadorGato);
+    }
 
-	public void put(Gato gato) {
-		gatos.put(gato.getIdentificadorGato(), gato);
-		persist();
-	}
+    public void put(Gato gato) {
+        gatos.put(gato.getIdentificadorGato(), gato);
+        persist();
+    }
 
-	public ArrayList<Gato> getList() {
-		return new ArrayList(gatos.values());
-	}
+    public ArrayList<Gato> getList() {
+        return new ArrayList(gatos.values());
+    }
 
-	public void persist() {
+    public void persist() {
 
         try {
 
@@ -42,6 +42,8 @@ public class MapeadorGato{
             oIS.writeObject(gatos);
             oIS.flush();
             fout.flush();
+            oIS.close();
+            fout.close();
 
         } catch (FileNotFoundException ex) {
 
@@ -52,34 +54,38 @@ public class MapeadorGato{
             System.out.println("PROBLEMA NA EXECUCAO DO PROGRAMA");
 
         }
-	}
-	   public void load() {
- 
-		try {
+    }
 
-			FileInputStream fIS = new FileInputStream(fileName);
-			ObjectInputStream oIPS = new ObjectInputStream(fIS);
+    public void load() {
 
-			this.gatos = (HashMap<String, Gato>) oIPS.readObject();
+        try {
 
-			oIPS.close();
-			fIS.close();
+            FileInputStream fIS = new FileInputStream(fileName);
+            ObjectInputStream oIPS = new ObjectInputStream(fIS);
 
-		} catch (ClassNotFoundException ex) {
+            this.gatos = (HashMap<String, Gato>) oIPS.readObject();
 
-			System.out.println("ARQUIVO NAO ENCONTRADO !!");
+            oIPS.close();
+            fIS.close();
 
-		} catch (IOException e) {
+        } catch (ClassNotFoundException ex) {
 
-			System.out.println("# ERROR # ");
-		}
-	}
+            System.out.println("ARQUIVO NAO ENCONTRADO !!");
 
+        } catch (FileNotFoundException ex) {
 
+            System.out.println("ARQUIVO NAO ENCONTRADO!!!");
 
-	public void remove(Gato gato) {
-            gatos.remove(gato.getIdentificadorGato());
-	    persist();
-	}
+        } catch (IOException e) {
+
+            System.out.println("# ERROR # ");
+            persist();
+        }
+    }
+
+    public void remove(Gato gato) {
+        gatos.remove(gato.getIdentificadorGato());
+        persist();
+    }
 
 }

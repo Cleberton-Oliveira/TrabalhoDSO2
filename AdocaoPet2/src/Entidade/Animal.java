@@ -2,8 +2,9 @@
 package Entidade;
 
 import Interfaces.IAnimal;
+import java.io.Serializable;
 
-public abstract class Animal implements IAnimal {
+public abstract class Animal implements IAnimal, Serializable {
     
     String nome;
     int sexo;

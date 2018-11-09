@@ -37,6 +37,7 @@ public class AdotaPet extends JFrame implements ActionListener{
        this.ctrlPet = ctrlPet; 
        tela();
     } 
+ 
 
     public void tela(){
         Container container = getContentPane();
@@ -261,6 +262,7 @@ public class AdotaPet extends JFrame implements ActionListener{
         setVisible(true);
     }
     public void fecha(){
+        
         setVisible(false);
     }
 }

@@ -1,9 +1,10 @@
 package Entidade;
 
 import Interfaces.IUsuario;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuario implements IUsuario{
+public class Usuario implements IUsuario, Serializable{
     private String nome;
     private String cpf;
     private String senha;
