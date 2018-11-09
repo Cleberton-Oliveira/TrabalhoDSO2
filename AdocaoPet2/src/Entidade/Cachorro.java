@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 
 public class Cachorro extends Animal{
+    private String identificadorCachorro;
     private int  raca;
     
     public enum RACACACHORRO  {
@@ -23,12 +24,21 @@ public class Cachorro extends Animal{
     }
     
     
-    public Cachorro(String nome, int idade, int raca, int sexo) {
+    public Cachorro(String nome, int idade, int raca, int sexo, String id){
         super(nome,sexo,idade);
         this.nome = nome;
         this.idade = idade;
         this.raca = raca;
         this.sexo = sexo;
+        this.identificadorCachorro = "Cachorro" + id;
+    }
+
+    public String getIdentificadorCachorro() {
+        return identificadorCachorro;
+    }
+
+    public void setIdentificadorCachorro(String identificadorCachorro) {
+        this.identificadorCachorro = identificadorCachorro;
     }
 
 

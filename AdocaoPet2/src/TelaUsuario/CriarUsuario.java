@@ -121,7 +121,7 @@ public class CriarUsuario extends JFrame implements ActionListener{
     }
     
     public void erro(){
-        JOptionPane.showMessageDialog(null,"ERRO AO CRIAR CONTA\n CPF já cadastrado");
+        JOptionPane.showMessageDialog(null,"ERRO AO CRIAR CONTA\n CPF já cadastrado ou quantidade de caracteres invalida");
         exibe();
     }
     

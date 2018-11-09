@@ -25,16 +25,21 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
     private JComboBox animal;
 //    private GerenciadorBotoes btManager;
     
+    private int valorPet;
+    
     public ListaParaAdocao(ControladorPet ctrlPet){
        
        this.ctrlPet = ctrlPet; 
      } 
-
+    
+    
     public void listagem(int pet, ArrayList<ConteudoTelaPet> listagemPets){
         Container container = getContentPane();
         container.setLayout(new GridBagLayout()); 
         GridBagConstraints c = new GridBagConstraints();
-
+        
+        valorPet = pet;
+        
         lbTexto = new JLabel("Listagem de animais para adoção:" );
         c.gridx = 0;
         c.gridy = 0;
@@ -51,8 +56,8 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
              container.add(lbTexto, c);
              
             btCancel = new JButton("Cancel");
-            c.gridx = 1;
-            c.gridy = 8;
+            c.gridx = 0;
+            c.gridy = 2;
             btCancel.addActionListener(this);
             container.add(btCancel, c);
              
@@ -62,26 +67,30 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
            
             for (ConteudoTelaPet conteudoTela : listagemPets){
                 
-                String nome =  conteudoTela.nomePet;
+                String animal =  "PET:  NOME:  " + conteudoTela.nomePet + "   ||   IDADE: " + conteudoTela.idadePet;
                 
-                pets.add(nome);
+                pets.add(animal);
                 
-                numero++;
+         
 
             }
             
-                animal = new JComboBox(pets.toArray());
-                animal.setSelectedIndex(0);
-                c.gridx = 0;
-                c.gridy = 1;
-                animal.addActionListener(this);
-                container.add(animal, c);   
-     
-                numero++; 
-           
-            btCancel = new JButton("Cancel");
+            animal = new JComboBox(pets.toArray());
+            animal.setSelectedIndex(0);
             c.gridx = 0;
-            c.gridy = 0 + numero;
+            c.gridy = 1;
+            animal.addActionListener(this);
+            container.add(animal, c);   
+             
+            btOk = new JButton("Adotar");
+            c.gridx = 1;
+            c.gridy = 1;
+            btOk.addActionListener(this);
+            container.add(btOk, c);    
+                
+            btCancel = new JButton("Não adotar nenhum");
+            c.gridx = 0;
+            c.gridy = 2;
             btCancel.addActionListener(this);
             container.add(btCancel, c);
             
@@ -99,10 +108,13 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
      if(e.getSource().equals(btCancel)){
          fecha();
+         JOptionPane.showMessageDialog(null,"NENHUM PET ADOTADO");
          ctrlPet.menuPrincipal();
      
         }else if(e.getSource().equals(btOk)){
-              ctrlPet.petAdotado(1,1);
+            fecha();
+            JOptionPane.showMessageDialog(null,"PARABÉNS\n Pet adotado com sucesso.");
+            ctrlPet.petAdotado(animal.getSelectedIndex(), valorPet);
         }    
     
     }

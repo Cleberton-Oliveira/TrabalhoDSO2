@@ -1,6 +1,6 @@
 package Mapeadores;
 
-import Entidade.Usuario;
+import Entidade.Cachorro;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,26 +11,26 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class MapeadorUsuario {
+public class MapeadorCachorro{
 
-	private HashMap<String, Usuario> usuarios = new HashMap<>();
-	private final String fileName = "arquivos.Usuario";
+	private HashMap<String, Cachorro> cachorros = new HashMap<>();
+	private final String fileName = "arquivos.Cachorro";
 
-	public MapeadorUsuario() {
+	public MapeadorCachorro() {
 		load();
 	}
 
-	public Usuario getUsuario(String cpf) {
-		return usuarios.get(cpf);
+	public Cachorro getUsuario(String identificadorCachorro) {
+		return cachorros.get(identificadorCachorro);
 	}
 
-	public void put(Usuario usuario) {
-		usuarios.put(usuario.getCpf(), usuario);
+	public void put(Cachorro cachorro) {
+		cachorros.put(cachorro.getIdentificadorCachorro(), cachorro);
 		persist();
 	}
 
-	public ArrayList<Usuario> getList() {
-		return new ArrayList(usuarios.values());
+	public ArrayList<Cachorro> getList() {
+		return new ArrayList(cachorros.values());
 	}
 
 	public void persist() {
@@ -39,7 +39,7 @@ public class MapeadorUsuario {
 
             FileOutputStream fout = new FileOutputStream(fileName);
             ObjectOutputStream oIS = new ObjectOutputStream(fout);
-            oIS.writeObject(usuarios);
+            oIS.writeObject(cachorros);
             oIS.flush();
             fout.flush();
 
@@ -60,7 +60,7 @@ public class MapeadorUsuario {
 			FileInputStream fIS = new FileInputStream(fileName);
 			ObjectInputStream oIPS = new ObjectInputStream(fIS);
 
-			this.usuarios = (HashMap<String, Usuario>) oIPS.readObject();
+			this.cachorros = (HashMap<String, Cachorro>) oIPS.readObject();
 
 			oIPS.close();
 			fIS.close();
@@ -77,11 +77,9 @@ public class MapeadorUsuario {
 
 
 
-	public void remove(Usuario usuario) {
-
-		usuarios.remove(usuario.getCpf());
-		
-		persist();
+	public void remove(Cachorro cachorro) {
+            cachorros.remove(cachorro.getIdentificadorCachorro());
+	    persist();
 	}
 
 }

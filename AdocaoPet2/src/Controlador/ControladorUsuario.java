@@ -32,9 +32,7 @@ public class ControladorUsuario {
 		this.login = new Login(this);
 		this.criarUsuario = new CriarUsuario(this);
                 this.editarDados = new EditarDados(this);
-
 	}
-
             
     public void fazerLoginTela() {
         login.exibe();
@@ -71,6 +69,10 @@ public class ControladorUsuario {
         for(Usuario usuario: mapeador.getList()){
             if(cpf.equals(usuario.getCpf())){
                 criarUsuario.fecha();
+                criarUsuario.erro();
+                return;
+            }
+            else if(cpf.length() != 3){
                 criarUsuario.erro();
                 return;
             }

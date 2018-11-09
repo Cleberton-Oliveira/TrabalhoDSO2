@@ -1,6 +1,6 @@
 package Mapeadores;
 
-import Entidade.Usuario;
+import Entidade.Passaro;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,26 +11,26 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class MapeadorUsuario {
+public class MapeadorPassaro{
 
-	private HashMap<String, Usuario> usuarios = new HashMap<>();
-	private final String fileName = "arquivos.Usuario";
+	private HashMap<String, Passaro> passaros = new HashMap<>();
+	private final String fileName = "arquivos.Passaro";
 
-	public MapeadorUsuario() {
+	public MapeadorPassaro() {
 		load();
 	}
 
-	public Usuario getUsuario(String cpf) {
-		return usuarios.get(cpf);
+	public Passaro getUsuario(String identificadorPassaro) {
+		return passaros.get(identificadorPassaro);
 	}
 
-	public void put(Usuario usuario) {
-		usuarios.put(usuario.getCpf(), usuario);
+	public void put(Passaro passaro) {
+		passaros.put(passaro.getIdentificadorPassaro(), passaro);
 		persist();
 	}
 
-	public ArrayList<Usuario> getList() {
-		return new ArrayList(usuarios.values());
+	public ArrayList<Passaro> getList() {
+		return new ArrayList(passaros.values());
 	}
 
 	public void persist() {
@@ -39,7 +39,7 @@ public class MapeadorUsuario {
 
             FileOutputStream fout = new FileOutputStream(fileName);
             ObjectOutputStream oIS = new ObjectOutputStream(fout);
-            oIS.writeObject(usuarios);
+            oIS.writeObject(passaros);
             oIS.flush();
             fout.flush();
 
@@ -60,7 +60,7 @@ public class MapeadorUsuario {
 			FileInputStream fIS = new FileInputStream(fileName);
 			ObjectInputStream oIPS = new ObjectInputStream(fIS);
 
-			this.usuarios = (HashMap<String, Usuario>) oIPS.readObject();
+			this.passaros = (HashMap<String, Passaro>) oIPS.readObject();
 
 			oIPS.close();
 			fIS.close();
@@ -77,11 +77,9 @@ public class MapeadorUsuario {
 
 
 
-	public void remove(Usuario usuario) {
-
-		usuarios.remove(usuario.getCpf());
-		
-		persist();
+	public void remove(Passaro passaro) {
+            passaros.remove(passaro.getIdentificadorPassaro());
+	    persist();
 	}
 
 }

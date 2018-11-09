@@ -3,11 +3,8 @@ package Entidade;
 
 public class Passaro extends Animal{
       private int  raca;
-
-   
-
-    
-    
+      private String identificadorPassaro;
+      
     public enum RACAPASSARO  {
         CACATUA(1),
         CALOPSITA(2),
@@ -22,12 +19,17 @@ public class Passaro extends Animal{
         }
     }
 
-    public Passaro(String nome, int idade, int raca, int sexo) {
+    public Passaro(String nome, int idade, int raca, int sexo, String id) {
         super(nome,sexo,idade);
         this.nome = nome;
         this.idade = idade;
         this.raca = raca;
         this.sexo = sexo;
+        this.identificadorPassaro = "passaro" + id;
+    }
+
+    public String getIdentificadorPassaro() {
+        return identificadorPassaro;
     }
 
 

@@ -3,6 +3,7 @@ package Entidade;
 
 public class Gato extends Animal{
       private int  raca;
+      public String identificadorGato;
 
 
     public enum RACAGATO  {
@@ -18,12 +19,21 @@ public class Gato extends Animal{
         }
     }
 
-    public Gato(String nome, int idade, int raca, int sexo) {
+    public Gato(String nome, int idade, int raca, int sexo, String id) {
         super(nome,sexo,idade);
         this.nome = nome;
         this.idade = idade;
         this.raca = raca;
         this.sexo = sexo;
+        this.identificadorGato = "gato" + id;
+    }
+
+    public String getIdentificadorGato() {
+        return identificadorGato;
+    }
+
+    public void setIdentificadorGato(String identificadorGato) {
+        this.identificadorGato = identificadorGato;
     }
 
 

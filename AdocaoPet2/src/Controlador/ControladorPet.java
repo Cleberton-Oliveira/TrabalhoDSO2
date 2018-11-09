@@ -6,6 +6,9 @@ import Entidade.ConteudoTelaPet;
 import Entidade.Cachorro;
 import Entidade.Gato;
 import Entidade.Passaro;
+import Mapeadores.MapeadorCachorro;
+import Mapeadores.MapeadorGato;
+import Mapeadores.MapeadorPassaro;
 import TelaPet.AdotaPet;
 import TelaPet.ListaParaAdocao;
 import TelaPet.TelaPets;
@@ -17,9 +20,10 @@ public class ControladorPet {
     private AdotaPet adotaPet;
     private DoarPet doarPet;
     private ListaParaAdocao listaParaAdocao;
-    private ArrayList<Cachorro> cachorros;
-    private ArrayList<Gato> gatos;
-    private ArrayList<Passaro> passaros;
+    private MapeadorCachorro mapeadorCachorro;
+    private MapeadorGato mapeadorGato;
+    private MapeadorPassaro mapeadorPassaro;
+    private int idAnimal;
     
     private final int CACHORRO=1,GATO=2, PASSARO=3;
         
@@ -29,21 +33,22 @@ public class ControladorPet {
         this.adotaPet = new AdotaPet(this);
         this.listaParaAdocao = new ListaParaAdocao(this);
         this.doarPet = new DoarPet(this);
-        this.cachorros = new ArrayList<>();
-        this.gatos = new ArrayList<>();
-        this.passaros = new ArrayList<>();
+        this.mapeadorCachorro = new MapeadorCachorro();
+        this.mapeadorGato = new MapeadorGato();
+        this.mapeadorPassaro = new MapeadorPassaro();
     }
+   // ---------------------- Construção automatica------------------------------- 
+//    public void addCachorro(Cachorro cachorro){
+//        mapeadorCachorro.put(cachorro);    
+//    }
+//    public void addGato(Gato gato){
+//        gatos.add(gato);
+//    }
+//    public void addPassaro(Passaro passaro){
+//        passaros.add(passaro);
+//    }
+    //----------------------------------------------------------------------------
     
-    public void addCachorro(Cachorro cachorro){
-        cachorros.add(cachorro);
-    }
-    public void addGato(Gato gato){
-        gatos.add(gato);
-    }
-    public void addPassaro(Passaro passaro){
-        passaros.add(passaro);
-    }
-
     public void doarPet() {
         doarPet.exibe();
     }
@@ -51,15 +56,12 @@ public class ControladorPet {
     public void adotaPet() {
         adotaPet.exibe();
     }
-
-
     
-    public void adocao(int pet, int opcaoRaca, int opcaoSexo) {
+    public void exibeAdocao(int pet, int opcaoRaca, int opcaoSexo) {
         ArrayList<ConteudoTelaPet> listagemPets = new ArrayList<ConteudoTelaPet>();
-   
-               switch(pet){
+                  switch(pet){
             case CACHORRO: 
-                for(Cachorro cachorro: cachorros){
+                for(Cachorro cachorro: mapeadorCachorro.getList()){
                     if(opcaoRaca == cachorro.getRaca() && opcaoSexo == cachorro.getSexo()){
                        listagemPets.add(empacotaCachorro(cachorro));
                     }
@@ -67,7 +69,7 @@ public class ControladorPet {
                 listaParaAdocao.listagem(CACHORRO, listagemPets);
                 break;
             case GATO:
-                 for(Gato gato: gatos){
+                 for(Gato gato: mapeadorGato.getList()){
                     if(opcaoRaca == gato.getRaca()  && opcaoSexo == gato.getSexo()){
                        listagemPets.add(empacotaGato(gato));
                     }
@@ -75,7 +77,7 @@ public class ControladorPet {
                 listaParaAdocao.listagem(GATO, listagemPets);
                 break;
              case PASSARO:
-                  for(Passaro passaro: passaros){
+                  for(Passaro passaro: mapeadorPassaro.getList()){
                     if(opcaoRaca == passaro.getRaca() && opcaoSexo == passaro.getSexo()){
                        listagemPets.add(empacotaPassaro(passaro));
                     }
@@ -88,49 +90,55 @@ public class ControladorPet {
     }
     
 
-//    public void cadastroDog(ConteudoTelaPet conteudoTela) {
-//        Cachorro cachorro = desempacotaCachorro(conteudoTela);
-//        cachorros.add(cachorro);
-//        ctrlPrincipal.doaCachorro(cachorro);   
-//        ctrlPrincipal.registroSucesso();
-//    }
-//
-//    public void cadastroGato(ConteudoTelaPet conteudoTela) {
-//        Gato gato = desempacotaGato(conteudoTela);
-//        gatos.add(gato);
-//        ctrlPrincipal.doaGato(gato);   
-//        ctrlPrincipal.registroSucesso();
-//    }
-//
-//    public void cadastroPassaro(ConteudoTelaPet conteudoTela) {
-//        Passaro passaro = desempacotaPassaro(conteudoTela);
-//        passaros.add(passaro);
-//        ctrlPrincipal.doaPassaro(passaro);   
-//        ctrlPrincipal.registroSucesso();
-//    }
-//    
-//    
+    public void cadastroDog(ConteudoTelaPet conteudoTela) {
+        Cachorro cachorro = desempacotaCachorro(conteudoTela);
+        mapeadorCachorro.put(cachorro);
+        ctrlPrincipal.doaCachorro(cachorro);
+        menuPrincipal();
+    }
+
+    public void cadastroGato(ConteudoTelaPet conteudoTela) {
+        Gato gato = desempacotaGato(conteudoTela);
+        mapeadorGato.put(gato);
+        ctrlPrincipal.doaGato(gato);   
+        menuPrincipal();
+    }
+
+    public void cadastroPassaro(ConteudoTelaPet conteudoTela) {
+        Passaro passaro = desempacotaPassaro(conteudoTela);
+        mapeadorPassaro.put(passaro);
+        ctrlPrincipal.doaPassaro(passaro);  
+        menuPrincipal();
+    }
+    
+    
     
       
     private Cachorro desempacotaCachorro(ConteudoTelaPet conteudoTela) {
-       return new Cachorro(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet);
+      int id = idAnimal ++;   
+      conteudoTela.identificador = Integer.toString(id);
+      return new Cachorro(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet, conteudoTela.identificador);
     }
     private Gato desempacotaGato(ConteudoTelaPet conteudoTela) {
-       return new Gato(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet);
+       int id = idAnimal ++;   
+      conteudoTela.identificador = Integer.toString(id); 
+      return new Gato(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet, conteudoTela.identificador);
     }
     private Passaro desempacotaPassaro(ConteudoTelaPet conteudoTela) {
-       return new Passaro(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet);
+      int id = idAnimal ++;   
+      conteudoTela.identificador = Integer.toString(id); 
+      return new Passaro(conteudoTela.nomePet, conteudoTela.idadePet, conteudoTela.racaPet, conteudoTela.sexoPet, conteudoTela.identificador);
     }
     
     
     private ConteudoTelaPet empacotaCachorro(Cachorro cachorro) {
-       return new ConteudoTelaPet(cachorro.getNome(), cachorro.getIdade(), cachorro.getRaca(), cachorro.getSexo());
+       return new ConteudoTelaPet(cachorro.getNome(), cachorro.getIdade(), cachorro.getRaca(), cachorro.getSexo(), cachorro.getIdentificadorCachorro());
     }
     private ConteudoTelaPet empacotaGato(Gato gato) {
-       return new ConteudoTelaPet(gato.getNome(), gato.getIdade(), gato.getRaca(), gato.getSexo());
+       return new ConteudoTelaPet(gato.getNome(), gato.getIdade(), gato.getRaca(), gato.getSexo(), gato.getIdentificadorGato());
     }
     private ConteudoTelaPet empacotaPassaro(Passaro passaro) {
-       return new ConteudoTelaPet(passaro.getNome(), passaro.getIdade(), passaro.getRaca(), passaro.getSexo());
+       return new ConteudoTelaPet(passaro.getNome(), passaro.getIdade(), passaro.getRaca(), passaro.getSexo(), passaro.getIdentificadorPassaro());
     }
     
     public void menuPrincipal() {
@@ -149,7 +157,7 @@ public class ControladorPet {
         }else{        
         switch(pet){
             case CACHORRO:
-                Cachorro cachorro = cachorros.get(opcao - 1);
+                Cachorro cachorro = mapeadorCachorro.getList().get(opcao);
                     for(Animal adocao: animal){
                         if(adocao.getEspecie() == cachorro.getEspecie()){
                             telaPets.exibeMaximoEspecie(pet);
@@ -158,12 +166,13 @@ public class ControladorPet {
                         }
                     }
                     ctrlPrincipal.adocaoCachorro(cachorro);    
-                    cachorros.remove(opcao - 1);
+                    mapeadorCachorro.remove(cachorro);
                     telaPets.exibeSucessoAdocao(pet);
+                    System.out.print(cachorro.getIdentificadorCachorro());
                     menuPrincipal();   
                     break;       
             case GATO:
-                Gato gato = gatos.get(opcao - 1);
+                Gato gato = mapeadorGato.getList().get(opcao);
                 for(Animal adocao: animal){
                         if(adocao.getEspecie() == gato.getEspecie()){
                             telaPets.exibeMaximoEspecie(pet);
@@ -172,12 +181,13 @@ public class ControladorPet {
                         }
                     }
                 ctrlPrincipal.adocaoGato(gato);    
-                gatos.remove(opcao - 1);
+                mapeadorGato.remove(gato);
                 telaPets.exibeSucessoAdocao(pet);
+                System.out.print(gato.getIdentificadorGato());
                 menuPrincipal();
                 break;
             case PASSARO:
-                Passaro passaro = passaros.get(opcao - 1);
+                Passaro passaro = mapeadorPassaro.getList().get(opcao);
                  for(Animal adocao: animal){
                         if(adocao.getEspecie() == passaro.getEspecie()){
                             telaPets.exibeMaximoEspecie(pet);
@@ -186,8 +196,9 @@ public class ControladorPet {
                         }
                     }
                 ctrlPrincipal.adocaoPassaro(passaro);    
-                passaros.remove(opcao - 1);
+                mapeadorPassaro.remove(passaro);
                 telaPets.exibeSucessoAdocao(pet);
+                System.out.print(passaro.getIdentificadorPassaro());
                 menuPrincipal();
                 break;  
             }

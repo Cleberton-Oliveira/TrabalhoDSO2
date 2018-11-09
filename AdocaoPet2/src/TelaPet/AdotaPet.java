@@ -249,7 +249,7 @@ public class AdotaPet extends JFrame implements ActionListener{
             int intRaca = raca.getSelectedIndex() + 1;
             int intSexo = sexo.getSelectedIndex() + 1;
             fecha();
-            ctrlPet.adocao(animal, intRaca, intSexo);
+            ctrlPet.exibeAdocao(animal, intRaca, intSexo);
            
             
        }else if(e.getSource().equals(btCancel)){
