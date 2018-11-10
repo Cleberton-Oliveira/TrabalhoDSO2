@@ -18,7 +18,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login extends JFrame implements ActionListener{
-    private ControladorUsuario ctrlUsuario;
     private JLabel texto;
     private JButton btSair;
     private JButton btEntrar;
@@ -26,8 +25,7 @@ public class Login extends JFrame implements ActionListener{
     private JPasswordField senha;
     
     
-    public Login(ControladorUsuario ctrlUsuario) {
-        this.ctrlUsuario = ctrlUsuario; 
+    public Login() {
         tela();
     } 
     public void tela(){
@@ -90,10 +88,10 @@ public class Login extends JFrame implements ActionListener{
         String login = cpf.getText() +  senha.getText();          
         if(e.getSource().equals(btEntrar)){
             fecha();
-            ctrlUsuario.logar(login);
+            ControladorUsuario.getInstance().logar(login);
         }else if(e.getSource().equals(btSair)){
             fecha();
-            ctrlUsuario.iniciar();
+            ControladorUsuario.getInstance().iniciar();
         }
     }
 

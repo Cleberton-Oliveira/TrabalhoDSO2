@@ -31,7 +31,7 @@ public class Cachorro extends Animal implements Serializable{
         this.idade = idade;
         this.raca = raca;
         this.sexo = sexo;
-        this.identificadorCachorro = "Cachorro" + id;
+        this.identificadorCachorro = id;
     }
 
     public String getIdentificadorCachorro() {

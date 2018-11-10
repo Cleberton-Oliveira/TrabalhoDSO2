@@ -21,7 +21,6 @@ import java.lang.NumberFormatException;
 
 
 public class DoarPet extends JFrame implements ActionListener{
-    private ControladorPet ctrlPet;
     private JLabel lbTexto;
     private JButton btCachorro;
     private JButton btGato;
@@ -36,17 +35,10 @@ public class DoarPet extends JFrame implements ActionListener{
     
     private int animal;
     
-    public DoarPet(ControladorPet ctrlPet){
-       
-       this.ctrlPet = ctrlPet; 
+    public DoarPet(){
        tela();
     } 
-    public DoarPet(int tipo,ControladorPet ctrlPet){
-       
-       this.ctrlPet = ctrlPet; 
-       tela();
-    } 
-
+    
     public void tela(){
         Container container = getContentPane();
         container.setLayout(new GridBagLayout()); 
@@ -330,17 +322,17 @@ public class DoarPet extends JFrame implements ActionListener{
             
         switch(animal){
             case 1: 
-                ctrlPet.cadastroDog(conteudoTela);
+                ControladorPet.getInstance().cadastroDog(conteudoTela);
                 fecha();
                 JOptionPane.showMessageDialog(null,"PARABÉNS\n Cachorro doado com sucesso.");
                 break;
             case 2:
-                ctrlPet.cadastroGato(conteudoTela);
+                ControladorPet.getInstance().cadastroGato(conteudoTela);
                 fecha();
                 JOptionPane.showMessageDialog(null,"PARABÉNS\n Gato doado com sucesso.");
                 break;
              case 3:
-                ctrlPet.cadastroPassaro(conteudoTela);
+                ControladorPet.getInstance().cadastroPassaro(conteudoTela);
                 fecha();
                 JOptionPane.showMessageDialog(null,"PARABÉNS\n Passaro doado com sucesso.");
                 break;    
@@ -348,7 +340,7 @@ public class DoarPet extends JFrame implements ActionListener{
        
        }else if(e.getSource().equals(btCancel)){
            fecha();
-           ctrlPet.menuPrincipal();    
+           ControladorPet.getInstance().menuPrincipal();    
        }            
     }
     public void exibe(){

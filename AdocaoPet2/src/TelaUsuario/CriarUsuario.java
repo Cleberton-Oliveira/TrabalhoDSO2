@@ -17,9 +17,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class CriarUsuario extends JFrame implements ActionListener{
-
-    
-    private ControladorUsuario ctrlUsuario;
     private JLabel texto;
     private JButton btSair;
     private JButton btEnviar;
@@ -28,8 +25,8 @@ public class CriarUsuario extends JFrame implements ActionListener{
     private JPasswordField senha;
     
     
-    public CriarUsuario(ControladorUsuario ctrlUsuario) {
-        this.ctrlUsuario = ctrlUsuario; 
+    public CriarUsuario() {
+ 
         tela();
     } 
     public void tela(){
@@ -113,10 +110,10 @@ public class CriarUsuario extends JFrame implements ActionListener{
         
         if(e.getSource().equals(btEnviar)){
             fecha();
-            ctrlUsuario.incluiUsuario(conteudoTela);
+            ControladorUsuario.getInstance().incluiUsuario(conteudoTela);
         }else if(e.getSource().equals(btSair)){
             fecha();
-            ctrlUsuario.iniciar();
+            ControladorUsuario.getInstance().iniciar();
         }
     }
     

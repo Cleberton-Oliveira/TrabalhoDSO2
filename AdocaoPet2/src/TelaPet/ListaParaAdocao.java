@@ -18,35 +18,27 @@ import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 
 public class ListaParaAdocao extends JFrame implements ActionListener{
-    private ControladorPet ctrlPet;
+
     private JLabel lbTexto;
     private JButton btOk;
     private JButton btCancel; 
-    private JComboBox animal;
-//    private GerenciadorBotoes btManager;
-    
+    private JComboBox animal; 
     private int valorPet;
+    private ArrayList<String>  id;
     
-    public ListaParaAdocao(ControladorPet ctrlPet){    
-       this.ctrlPet = ctrlPet; 
-     } 
-    
-    
+
     public void listagem(int pet, ArrayList<ConteudoTelaPet> listagemPets){
         Container container = getContentPane();
         container.setLayout(new GridBagLayout()); 
         GridBagConstraints c = new GridBagConstraints();
-        
+        this.id =  new ArrayList<>();
         valorPet = pet;
         
         lbTexto = new JLabel("Listagem de animais para adoção:" );
         c.gridx = 0;
         c.gridy = 0;
         container.add(lbTexto, c);
-        
-        int numero = 1;
-        
-        
+     
         
         if(listagemPets.isEmpty()){
              lbTexto = new JLabel("Não temos nenhum animal com essas caracteristicas no momento" );
@@ -66,20 +58,20 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
            
             for (ConteudoTelaPet conteudoTela : listagemPets){
                 
-                String animal =  "PET:  NOME:  " + conteudoTela.nomePet + "   ||   IDADE: " + conteudoTela.idadePet;
+                String petParaAdocao =  "PET:  NOME:  " + conteudoTela.nomePet + "   ||   IDADE: " + conteudoTela.idadePet  +"  || CODIGO: " + conteudoTela.identificador;
+                id.add(conteudoTela.identificador);
                 
-                pets.add(animal);
-                
-         
-
+               pets.add(petParaAdocao);
             }
             
+                    
             animal = new JComboBox(pets.toArray());
             animal.setSelectedIndex(0);
             c.gridx = 0;
             c.gridy = 1;
             animal.addActionListener(this);
             container.add(animal, c);   
+             
              
             btOk = new JButton("Adotar");
             c.gridx = 1;
@@ -108,12 +100,11 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
      if(e.getSource().equals(btCancel)){
          fecha();
          JOptionPane.showMessageDialog(null,"NENHUM PET ADOTADO");
-         ctrlPet.menuPrincipal();
+         ControladorPet.getInstance().menuPrincipal();
      
         }else if(e.getSource().equals(btOk)){
             fecha();
-            JOptionPane.showMessageDialog(null,"PARABÉNS\n Pet adotado com sucesso.");
-            ctrlPet.petAdotado(animal.getSelectedIndex(), valorPet);
+            ControladorPet.getInstance().petAdotado(id.get(animal.getSelectedIndex()), valorPet);
         }    
     
     }
@@ -121,4 +112,19 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
 public void fecha(){
         setVisible(false);
    }
+
+    public void exibeSucessoAdocao(String pet) {
+       JOptionPane.showMessageDialog(null,"PARABÉNS\n Pet " + pet + " adotado com sucesso.");
+       ControladorPet.getInstance().menuPrincipal();
+    }
+
+    public void exibeMaximoEspecie() {
+       JOptionPane.showMessageDialog(null,"ERRO\n Você já adotou o numero maximo para essa especie");
+       ControladorPet.getInstance().menuPrincipal();
+    }
+
+    public void exibeMaximoAdocao() {
+       JOptionPane.showMessageDialog(null,"ERRO\n Você já adotou o numero maximo que o sistema permite");
+       ControladorPet.getInstance().menuPrincipal();
+    }
 }

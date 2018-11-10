@@ -27,7 +27,7 @@ public class Gato extends Animal implements Serializable{
         this.idade = idade;
         this.raca = raca;
         this.sexo = sexo;
-        this.identificadorGato = "gato" + id;
+        this.identificadorGato = id;
     }
 
     public String getIdentificadorGato() {

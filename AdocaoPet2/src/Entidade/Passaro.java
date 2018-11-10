@@ -27,7 +27,7 @@ public class Passaro extends Animal implements Serializable{
         this.idade = idade;
         this.raca = raca;
         this.sexo = sexo;
-        this.identificadorPassaro = "passaro" + id;
+        this.identificadorPassaro = id;
     }
 
     public String getIdentificadorPassaro() {

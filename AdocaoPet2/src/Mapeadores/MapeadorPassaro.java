@@ -20,7 +20,7 @@ public class MapeadorPassaro {
         load();
     }
 
-    public Passaro getUsuario(String identificadorPassaro) {
+    public Passaro getPassaro(String identificadorPassaro) {
         return passaros.get(identificadorPassaro);
     }
 

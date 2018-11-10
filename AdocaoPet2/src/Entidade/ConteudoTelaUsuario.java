@@ -1,7 +1,9 @@
 package Entidade;
 
+import java.io.Serializable;
 
-public class ConteudoTelaUsuario {
+
+public class ConteudoTelaUsuario implements Serializable {
     public String nomeUsuario;
     public String cpfUsuario;
     public String senhaUsuario;

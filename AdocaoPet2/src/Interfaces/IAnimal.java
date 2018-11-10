@@ -1,6 +1,6 @@
 package Interfaces;
 
-public interface IAnimal {
+public interface IAnimal{
 
 	public String getNome();
 

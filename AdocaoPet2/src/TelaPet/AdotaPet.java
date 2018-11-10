@@ -1,4 +1,5 @@
 package TelaPet;
+
 import Controlador.ControladorPet;
 import Entidade.Cachorro;
 import java.awt.Container;
@@ -17,8 +18,7 @@ import Entidade.Gato;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
-public class AdotaPet extends JFrame implements ActionListener{
-    private ControladorPet ctrlPet;
+public class AdotaPet extends JFrame implements ActionListener {
     private JLabel lbTexto;
     private JButton btCachorro;
     private JButton btGato;
@@ -29,19 +29,16 @@ public class AdotaPet extends JFrame implements ActionListener{
     private JComboBox raca;
 //    private JTextField tfNome;          
 //    private GerenciadorBotoes btManager;
-    
-    private int animal;
-    
-    public AdotaPet(ControladorPet ctrlPet){
-       
-       this.ctrlPet = ctrlPet; 
-       tela();
-    } 
- 
 
-    public void tela(){
+    private int animal;
+
+    public AdotaPet() {
+        tela();
+    }
+
+    public void tela() {
         Container container = getContentPane();
-        container.setLayout(new GridBagLayout()); 
+        container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         lbTexto = new JLabel("Qual Animal deseja adotar?");
@@ -54,216 +51,214 @@ public class AdotaPet extends JFrame implements ActionListener{
         c.gridy = 1;
         btCachorro.addActionListener(this);
         container.add(btCachorro, c);
-        
+
         btGato = new JButton("Gato");
         c.gridx = 0;
         c.gridy = 2;
         btGato.addActionListener(this);
         container.add(btGato, c);
-        
+
         btPassaro = new JButton("Passaro");
         c.gridx = 0;
         c.gridy = 3;
         btPassaro.addActionListener(this);
         container.add(btPassaro, c);
-       
+
         setSize(460, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
-    
-    
-    public void cachorro(){
+
+    public void cachorro() {
         Container container = getContentPane();
-        container.setLayout(new GridBagLayout()); 
+        container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
-        
-        String[] racaCachorro  = {"Pastor Alemão", "Labrador","Buldogle","Beagle","Poodle"}; 
+
+        String[] racaCachorro = {"Pastor Alemão", "Labrador", "Buldogle", "Beagle", "Poodle"};
         raca = new JComboBox(racaCachorro);
         raca.setSelectedIndex(0);
         c.gridx = 0;
         c.gridy = 4;
         raca.addActionListener(this);
         container.add(raca, c);
-       
+
         lbTexto = new JLabel("Qual a raca?");
         c.gridx = 0;
         c.gridy = 5;
         container.add(lbTexto, c);
-        
+
         DefaultComboBoxModel DefaultComboBoxModellistaDoCombo = new DefaultComboBoxModel();
-        
-        String[] s  = {"Masculino", "Feminino"}; 
+
+        String[] s = {"Masculino", "Feminino"};
         sexo = new JComboBox(s);
-        
+
         sexo.setSelectedIndex(0);
         c.gridx = 0;
         c.gridy = 6;
         sexo.addActionListener(this);
         container.add(sexo, c);
-        
+
         lbTexto = new JLabel("Qual o sexo?");
         c.gridx = 0;
         c.gridy = 7;
         container.add(lbTexto, c);
-        
+
         btOk = new JButton("Enviar");
         c.gridx = 0;
         c.gridy = 8;
         btOk.addActionListener(this);
         container.add(btOk, c);
-        
+
         btCancel = new JButton("Cancel");
         c.gridx = 1;
         c.gridy = 8;
         btCancel.addActionListener(this);
         container.add(btCancel, c);
-        
+
         setSize(460, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
-     public void gato(){
+
+    public void gato() {
         Container container = getContentPane();
-        container.setLayout(new GridBagLayout()); 
+        container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
-        
-        String[] racaGato  = {"Persa", "Siames","Vira Lata","AzulRusso"}; 
+
+        String[] racaGato = {"Persa", "Siames", "Vira Lata", "AzulRusso"};
         raca = new JComboBox(racaGato);
         raca.setSelectedIndex(0);
         c.gridx = 0;
         c.gridy = 4;
         raca.addActionListener(this);
         container.add(raca, c);
-       
+
         lbTexto = new JLabel("Qual a raca?");
         c.gridx = 0;
         c.gridy = 5;
         container.add(lbTexto, c);
-        
+
         DefaultComboBoxModel DefaultComboBoxModellistaDoCombo = new DefaultComboBoxModel();
-        
-        String[] s  = {"Masculino", "Feminino"}; 
+
+        String[] s = {"Masculino", "Feminino"};
         sexo = new JComboBox(s);
-        
+
         sexo.setSelectedIndex(0);
         c.gridx = 0;
         c.gridy = 6;
         sexo.addActionListener(this);
         container.add(sexo, c);
-        
+
         lbTexto = new JLabel("Qual o sexo?");
         c.gridx = 0;
         c.gridy = 7;
         container.add(lbTexto, c);
-        
+
         btOk = new JButton("Enviar");
         c.gridx = 0;
         c.gridy = 8;
         btOk.addActionListener(this);
         container.add(btOk, c);
-        
+
         btCancel = new JButton("Cancel");
         c.gridx = 1;
         c.gridy = 8;
         btCancel.addActionListener(this);
         container.add(btCancel, c);
-        
+
         setSize(460, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-     
-      public void passaro(){
+
+    public void passaro() {
         Container container = getContentPane();
-        container.setLayout(new GridBagLayout()); 
+        container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
-        
-        String[] racaPassaro  = {"Cacatua", "Calopsita","Canario","Papagaio","Periquito"}; 
+
+        String[] racaPassaro = {"Cacatua", "Calopsita", "Canario", "Papagaio", "Periquito"};
         raca = new JComboBox(racaPassaro);
         raca.setSelectedIndex(0);
         c.gridx = 0;
         c.gridy = 4;
         raca.addActionListener(this);
         container.add(raca, c);
-       
+
         lbTexto = new JLabel("Qual a raca?");
         c.gridx = 0;
         c.gridy = 5;
         container.add(lbTexto, c);
-        
+
         DefaultComboBoxModel DefaultComboBoxModellistaDoCombo = new DefaultComboBoxModel();
-        
-        String[] s  = {"Masculino", "Feminino"}; 
+
+        String[] s = {"Masculino", "Feminino"};
         sexo = new JComboBox(s);
-        
+
         sexo.setSelectedIndex(0);
         c.gridx = 0;
         c.gridy = 6;
         sexo.addActionListener(this);
         container.add(sexo, c);
-        
+
         lbTexto = new JLabel("Qual o sexo?");
         c.gridx = 0;
         c.gridy = 7;
         container.add(lbTexto, c);
-        
+
         btOk = new JButton("Enviar");
         c.gridx = 0;
         c.gridy = 8;
         btOk.addActionListener(this);
         container.add(btOk, c);
-        
+
         btCancel = new JButton("Cancel");
         c.gridx = 1;
         c.gridy = 8;
         btCancel.addActionListener(this);
         container.add(btCancel, c);
-        
+
         setSize(460, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-     if(e.getSource().equals(btCachorro)){
-         cachorro();
-         animal = 1;
-         
-        }else if(e.getSource().equals(btGato)){
-         gato();
-         animal = 2;
-            
-        }else if(e.getSource().equals(btPassaro)){
-         passaro();
-         animal =3;
-    
-       }else if(e.getSource().equals(btOk)){
+        if (e.getSource().equals(btCachorro)) {
+            cachorro();
+            animal = 1;
+
+        } else if (e.getSource().equals(btGato)) {
+            gato();
+            animal = 2;
+
+        } else if (e.getSource().equals(btPassaro)) {
+            passaro();
+            animal = 3;
+
+        } else if (e.getSource().equals(btOk)) {
             int intRaca = raca.getSelectedIndex() + 1;
             int intSexo = sexo.getSelectedIndex() + 1;
             fecha();
-            ctrlPet.exibeAdocao(animal, intRaca, intSexo);
-           
-            
-       }else if(e.getSource().equals(btCancel)){
-           fecha();
-           ctrlPet.menuPrincipal();    
-       }            
+            ControladorPet.getInstance().exibeAdocao(animal, intRaca, intSexo);
+
+        } else if (e.getSource().equals(btCancel)) {
+            fecha();
+            ControladorPet.getInstance().menuPrincipal();
+        }
     }
-    public void exibe(){
+
+    public void exibe() {
+        dispose();
         setVisible(true);
     }
-    public void fecha(){
-        
+
+    public void fecha() {
+
         setVisible(false);
     }
-}
 
+}

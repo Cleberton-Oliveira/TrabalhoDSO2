@@ -1,7 +1,9 @@
 package Entidade;
 
+import java.io.Serializable;
 
-public class ConteudoTelaPet {
+
+public class ConteudoTelaPet implements Serializable{
     public String nomePet;
     public int idadePet;
     public int racaPet;

@@ -17,9 +17,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class EditarDados extends JFrame implements ActionListener{
-
-    
-    private ControladorUsuario ctrlUsuario;
     private JLabel texto;
     private JButton btSair;
     private JButton btEditaNome;
@@ -30,8 +27,7 @@ public class EditarDados extends JFrame implements ActionListener{
     private JPasswordField senha;
     
     
-    public EditarDados(ControladorUsuario ctrlUsuario) {
-        this.ctrlUsuario = ctrlUsuario; 
+    public EditarDados() {
         tela();
     } 
     public void tela(){
@@ -136,7 +132,6 @@ public class EditarDados extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
 //        conteudoTela.nomeUsuario = nome.getText();
-
 //        conteudoTela.senhaUsuario = senha.getText();
         
         if(e.getSource().equals(btNome)){
@@ -146,15 +141,15 @@ public class EditarDados extends JFrame implements ActionListener{
             editaSenha();
         }else if(e.getSource().equals(btSair)){
             fecha();
-            ctrlUsuario.telaPrincipal();
+            ControladorUsuario.getInstance().telaPrincipal();
         }else if(e.getSource().equals(btEditaSenha)){
             fecha();
             JOptionPane.showMessageDialog(null,"Senha editada com sucesso");
-            ctrlUsuario.mudarSenha(senha.getText());
+            ControladorUsuario.getInstance().mudarSenha(senha.getText());
         }else if(e.getSource().equals(btEditaNome)){
             fecha();
             JOptionPane.showMessageDialog(null,"Nome editada com sucesso");
-            ctrlUsuario.mudarSenha(nome.getText());
+            ControladorUsuario.getInstance().mudarSenha(nome.getText());
         }
     }
    

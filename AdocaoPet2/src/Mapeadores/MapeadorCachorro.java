@@ -20,7 +20,7 @@ public class MapeadorCachorro {
         load();
     }
 
-    public Cachorro getUsuario(String identificadorCachorro) {
+    public Cachorro getCachorro(String identificadorCachorro) {
         return cachorros.get(identificadorCachorro);
     }
 
