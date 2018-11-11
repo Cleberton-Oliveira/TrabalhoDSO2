@@ -90,8 +90,8 @@ public final class ControladorPet {
     }
 
     public void cadastroDog(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = Integer.toString(mapeadorCachorro.getList().size());
-        System.out.println("O indentificador do cachorro é: cachorro" + conteudoTela.identificador);
+        conteudoTela.identificador = "idCachorro:" + Integer.toString(mapeadorCachorro.getList().size());
+        System.out.println("O indentificador do cachorro é: " + conteudoTela.identificador);
         Cachorro cachorro = desempacotaCachorro(conteudoTela);
         mapeadorCachorro.put(cachorro);
         ControladorPrincipal.getInstancia().doaCachorro(cachorro);
@@ -99,8 +99,8 @@ public final class ControladorPet {
     }
 
     public void cadastroGato(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = Integer.toString(mapeadorGato.getList().size());
-        System.out.println("O indentificador do gato é: gato" + conteudoTela.identificador);
+        conteudoTela.identificador = "idGato:" + Integer.toString(mapeadorGato.getList().size());
+        System.out.println("O indentificador do gato é: " + conteudoTela.identificador);
         Gato gato = desempacotaGato(conteudoTela);
         mapeadorGato.put(gato);
         ControladorPrincipal.getInstancia().doaGato(gato);
@@ -108,8 +108,8 @@ public final class ControladorPet {
     }
 
     public void cadastroPassaro(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = Integer.toString(mapeadorPassaro.getList().size());
-        System.out.println("O indentificador do passaro é: passaro" + conteudoTela.identificador);
+        conteudoTela.identificador = "idPassaro:" + Integer.toString(mapeadorPassaro.getList().size());
+        System.out.println("O indentificador do passaro é: " + conteudoTela.identificador);
         Passaro passaro = desempacotaPassaro(conteudoTela);
         mapeadorPassaro.put(passaro);
         ControladorPrincipal.getInstancia().doaPassaro(passaro);
@@ -161,7 +161,6 @@ public final class ControladorPet {
                     for (Animal adocao : animal) {
                         if (adocao.getEspecie() == cachorro.getEspecie()) {
                             listaParaAdocao.exibeMaximoEspecie();
-                            menuPrincipal();
                             return;
                         }
                     }
@@ -169,14 +168,12 @@ public final class ControladorPet {
                     mapeadorCachorro.remove(cachorro);
                     listaParaAdocao.exibeSucessoAdocao(cachorro.getNome());
                     System.out.print(cachorro.getIdentificadorCachorro());
-                    menuPrincipal();
                     return;
                 case GATO:
                     Gato gato = mapeadorGato.getGato(id);
                     for (Animal adocao : animal) {
                         if (adocao.getEspecie() == gato.getEspecie()) {
                             listaParaAdocao.exibeMaximoEspecie();
-                            menuPrincipal();
                             return;
                         }
                     }
@@ -184,14 +181,12 @@ public final class ControladorPet {
                     mapeadorGato.remove(gato);
                     listaParaAdocao.exibeSucessoAdocao(gato.getNome());
                     System.out.print(gato.getIdentificadorGato());
-                    menuPrincipal();
                     return;
                 case PASSARO:
                     Passaro passaro = mapeadorPassaro.getPassaro(id);
                     for (Animal adocao : animal) {
                         if (adocao.getEspecie() == passaro.getEspecie()) {
                             listaParaAdocao.exibeMaximoEspecie();
-                            menuPrincipal();
                             return;
                         }
                     }
@@ -199,7 +194,6 @@ public final class ControladorPet {
                     mapeadorPassaro.remove(passaro);
                     listaParaAdocao.exibeSucessoAdocao(passaro.getNome());
                     System.out.print(passaro.getIdentificadorPassaro());
-                    menuPrincipal();
                     return;
             }
         }

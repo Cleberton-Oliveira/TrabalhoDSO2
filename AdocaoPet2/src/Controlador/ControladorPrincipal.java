@@ -9,8 +9,7 @@ import TelaPrincipal.Iniciar;
 import TelaPrincipal.Menu;
 import java.util.ArrayList;
 
-public final class ControladorPrincipal {
-
+public final class ControladorPrincipal{
     private static ControladorPrincipal instancia;
     private Iniciar iniciar;
     private Login login;
@@ -19,12 +18,11 @@ public final class ControladorPrincipal {
     private final int CACHORRO = 1, GATO = 2, PASSARO = 3;
 
     private ControladorPrincipal() {
-        this.iniciar = new Iniciar(this);
-        this.menu = new Menu(this);
-
+        this.iniciar = new Iniciar();
+        this.menu = new Menu();
     }
 
-    public static ControladorPrincipal getInstancia() {
+    public static synchronized ControladorPrincipal getInstancia() {
         if (instancia == null) {
             instancia = new ControladorPrincipal();
         }

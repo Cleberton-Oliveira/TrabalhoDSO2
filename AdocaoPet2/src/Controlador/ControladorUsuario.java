@@ -1,5 +1,6 @@
 package Controlador;
 
+import TelaUsuario.TelaHistorico;
 import Entidade.Animal;
 import Entidade.Cachorro;
 import Entidade.ConteudoTelaUsuario;
@@ -17,18 +18,18 @@ import javax.swing.JOptionPane;
 public final class ControladorUsuario {
     private static ControladorUsuario instancia;
     private MapeadorUsuario mapeador;
-    private TelaUsuario telaUsuario;
     private String cpfLogado;
     private Login login;
     private CriarUsuario criarUsuario;
     private EditarDados editarDados;
+    private TelaHistorico telaHistorico;
 
-    public ControladorUsuario() {
+    private ControladorUsuario() {
         this.mapeador = new MapeadorUsuario();
-        this.telaUsuario = new TelaUsuario(this);
         this.login = new Login();
         this.criarUsuario = new CriarUsuario();
         this.editarDados = new EditarDados();
+        this.telaHistorico = new TelaHistorico();
     }
 
     public static synchronized ControladorUsuario getInstance() {
@@ -65,7 +66,7 @@ public final class ControladorUsuario {
         login.erroLogin();
     }
 
-    public void addUsuario(Usuario usuario) {
+    public void addSuperUsuario(Usuario usuario) {
         mapeador.put(usuario);
         usuario.eSuperUser();
     }
@@ -104,11 +105,11 @@ public final class ControladorUsuario {
         if (usuario.getSuperuser() == true) {
             ArrayList<Animal> adocao = usuario.getAdocao();
             ArrayList<Animal> doacao = usuario.getDoacao();
-            telaUsuario.historicoSuperUsuario(nome, adocao, doacao, mapeador.getList());
+            telaHistorico.historicoSuperUsuario(nome, adocao, doacao, mapeador.getList());
         } else {
             ArrayList<Animal> adocao = usuario.getAdocao();
             ArrayList<Animal> doacao = usuario.getDoacao();
-            telaUsuario.historico(nome, adocao, doacao);
+            telaHistorico.historico(nome, adocao, doacao);
         }
     }
 

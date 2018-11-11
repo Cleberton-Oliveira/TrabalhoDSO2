@@ -25,12 +25,12 @@ public class TelaUsuario extends JFrame{
     private JButton btOK;
     private JButton btCancel;
     private JTextField tfNome;          
-    private GerenciadorBotoes btManager;
+  
     
     public TelaUsuario(ControladorUsuario ctrlUsuario){
         this.ctrlUsuario = ctrlUsuario;
         this.teclado = new Scanner(System.in);
-        btManager = new GerenciadorBotoes();  
+     
     }
    
         private int leInteiro() {
@@ -44,89 +44,7 @@ public class TelaUsuario extends JFrame{
         }  
     }
     
-    public void exibeFazerLogin() {
-        Container container = getContentPane();
-        container.setLayout(new GridBagLayout());    
-        GridBagConstraints c = new GridBagConstraints();
-        
-        lbTexto = new JLabel("FAZER LOGIN");
-        c.gridx =0;
-        c.gridy =0;
-        container.add(lbTexto, c);  
-         
-        lbTexto = new JLabel("CPF: ");
-        c.gridx =0;
-        c.gridy =1;
-        container.add(lbTexto, c);  
-       
-        tfNome = new JTextField();
-        c.gridx = 1;
-        c.gridy = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        container.add(tfNome, c);
-        
-        lbTexto = new JLabel("Senha: ");
-        c.gridx = 0;
-        c.gridy = 2;
-        container.add(lbTexto, c);
-        
-        tfNome = new JTextField();
-        c.gridx = 1;
-        c.gridy = 2;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        container.add(tfNome, c);
-        
-        btCancel = new JButton("Cancelar");
-        c.gridx = 0;
-        c.gridy = 3;
-        btCancel.addActionListener(btManager); 
-        container.add(btCancel, c);
-        
-        btOK = new JButton("Entrar");
-        c.gridx = 1;
-        c.gridy = 3;
-        btOK.addActionListener(btManager);
-        container.add(btOK, c);
-          
-        setSize(700, 370);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible( true );
-    
-    }
-    
-    public void erroLogin() {
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("--------------------ERRO AO EFETUAR LOGIN-----------------------");
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("--------------------CPF ou Seha incorreto-----------------------");
-        System.out.println("----------------------------------------------------------------");
-        
-        exibeFazerLogin();
-    }
-
-
-    public void exibeCadastraUsuario() {
-        ConteudoTelaUsuario conteudoTela = new ConteudoTelaUsuario();
-        System.out.println("-------------------------CRIAR CONTA----------------------------");
-        System.out.println("----------------------------------------------------------------");
-        System.out.print("Nome: ");
-        conteudoTela.nomeUsuario = teclado.nextLine();
-        System.out.print("CPF: ");
-        conteudoTela.cpfUsuario = teclado.nextLine();
-        System.out.print("Senha: ");
-        conteudoTela.senhaUsuario = teclado.nextLine();
-        System.out.println("----------------------------------------------------------------");
-        ctrlUsuario.incluiUsuario(conteudoTela);
-    }
-
-    public void exibeContaCriadaComSucesso() {
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("-------------------CONTA CRIADA COM SUCESSO---------------------");
-        System.out.println("----------------------------------------------------------------");
-
-        exibeFazerLogin();
-    }
+  
 
      public void historico(String nome, ArrayList<Animal> adocao, ArrayList<Animal> doacao) {
         System.out.println("----------------------------------------------------------------");
@@ -165,14 +83,7 @@ public class TelaUsuario extends JFrame{
         }
     }
 
-    public void cpfJaCadastrado() {
-        System.out.println("----------------------- Erro ao Cadastrar ----------------------");
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("");
-        System.out.println("Já existe Usuario cadastrado com esse CPF");
-        System.out.println("");
-        exibeCadastraUsuario();
-    }
+   
 
     public void historicoSuperUsuario(String nome, ArrayList<Animal> adocao, ArrayList<Animal> doacao, ArrayList<Usuario> usuarios) {
         
@@ -225,6 +136,7 @@ public class TelaUsuario extends JFrame{
                         System.out.println("                      HISTORICO " + usuario.getNome() );
                         System.out.println("----------------------------------------------------------------");
                         System.out.println("CPF: "+ usuario.getCpf());
+                        int a = 2;
                         ArrayList<Animal> pets = usuario.getAdocao();
                          System.out.println("");
                          System.out.println("----------------------- ANIMAIS ADOTADOS -----------------------");
@@ -266,22 +178,6 @@ public class TelaUsuario extends JFrame{
         }
     }
 
-    public void cpfNaoPodeMudar() {
-        System.out.println("----------------------- Erro ao Cadastrar ----------------------");
-        System.out.println("----------------------------------------------------------------");
-        System.out.println("");
-        System.out.println("Já existe Usuario cadastrado com esse CPF");
-        System.out.println("");
-        ctrlUsuario.telaPrincipal();
-    }
-    
-    
-        private class GerenciadorBotoes implements ActionListener{
-     
-        @Override
-        public void actionPerformed(ActionEvent ae){
-            JOptionPane.showMessageDialog(null, "Botão Pressionado: " + ae.getActionCommand(), "Titulo", 2);
-        }
-        
-    }
+
+   
 }

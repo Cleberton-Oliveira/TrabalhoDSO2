@@ -312,8 +312,7 @@ public class DoarPet extends JFrame implements ActionListener{
                 conteudoTela.sexoPet = sexo.getSelectedIndex() + 1;
                 conteudoTela.nomePet = nome.getText();           
                 try {  
-                    int id = Integer.parseInt(idade.getText());
-                    conteudoTela.idadePet = id;
+                    conteudoTela.idadePet = Integer.parseInt(idade.getText());
                 }catch (NumberFormatException erro) {
                     System.out.println("Digite uma opção válida!" + erro.getMessage());
                     JOptionPane.showMessageDialog(null,"Valor Invalido\n Digite um valor inteiro para idade");

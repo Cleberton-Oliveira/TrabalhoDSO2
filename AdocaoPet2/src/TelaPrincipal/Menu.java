@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class Menu extends JFrame implements ActionListener{
-    private ControladorPrincipal ctrlPrincipal;
     private JLabel lbTexto;
     private JButton btAdotar;
     private JButton btDoar;
@@ -24,8 +23,7 @@ public class Menu extends JFrame implements ActionListener{
 //    private JTextField tfNome;          
 //    private GerenciadorBotoes btManager;
     
-    public Menu(ControladorPrincipal ctrlPrincipal){
-       this.ctrlPrincipal = ctrlPrincipal; 
+    public Menu(){
        tela();
     } 
 
@@ -84,26 +82,25 @@ public class Menu extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
      if(e.getSource().equals(btAdotar)){
          fecha();   
-         ctrlPrincipal.adotaPet();
+        ControladorPrincipal.getInstancia().adotaPet();
         }else if(e.getSource().equals(btDoar)){
             fecha();
-            ctrlPrincipal.doarPet();
+          ControladorPrincipal.getInstancia().doarPet();
             
         }else if(e.getSource().equals(btHistorico)){
             fecha();
-            ctrlPrincipal.historico();
-            
+            ControladorPrincipal.getInstancia().historico();
         }else if(e.getSource().equals(btEditarDados)){
             fecha();
-            ctrlPrincipal.editarDados();
+            ControladorPrincipal.getInstancia().editarDados();
             
         }else if(e.getSource().equals(btSair)){
             fecha();
-            ctrlPrincipal.iniciaPrograma();
+        ControladorPrincipal.getInstancia().iniciaPrograma();
             
         }else if(e.getSource().equals(btApagarConta)){
            fecha();
-            ctrlPrincipal.apagaConta();            
+            ControladorPrincipal.getInstancia().apagaConta();            
         }
     }
     public void exibe(){

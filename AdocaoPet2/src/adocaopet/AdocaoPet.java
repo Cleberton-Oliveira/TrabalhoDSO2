@@ -22,7 +22,7 @@ public class AdocaoPet {
 //        Passaro piupui = new Passaro("Piu Piu", 8, 3, 1);
 //        Passaro canarinha = new Passaro("Canarionha", 3, 3, 2);  
         Usuario superusuario = new Usuario("Cleberton", "123", "123");
-        ControladorPrincipal.getInstancia().getCtrlUsuario().addUsuario(superusuario);
+        ControladorPrincipal.getInstancia().getCtrlUsuario().addSuperUsuario(superusuario);
 //        ControladorPrincipal.getInstancia().getCtrlPet().addCachorro(bidu);
 //        ControladorPrincipal.getInstancia().getCtrlPet().addCachorro(rex);
 //        ControladorPrincipal.getInstancia().getCtrlPet().addCachorro(toto);
