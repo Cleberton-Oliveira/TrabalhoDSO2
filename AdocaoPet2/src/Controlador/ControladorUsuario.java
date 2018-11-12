@@ -23,6 +23,7 @@ public final class ControladorUsuario {
     private CriarUsuario criarUsuario;
     private EditarDados editarDados;
     private TelaHistorico telaHistorico;
+    private TelaUsuario telaUsuario;
 
     private ControladorUsuario() {
         this.mapeador = new MapeadorUsuario();
@@ -30,6 +31,7 @@ public final class ControladorUsuario {
         this.criarUsuario = new CriarUsuario();
         this.editarDados = new EditarDados();
         this.telaHistorico = new TelaHistorico();
+        this.telaUsuario = new TelaUsuario(this);
     }
 
     public static synchronized ControladorUsuario getInstance() {
@@ -105,11 +107,11 @@ public final class ControladorUsuario {
         if (usuario.getSuperuser() == true) {
             ArrayList<Animal> adocao = usuario.getAdocao();
             ArrayList<Animal> doacao = usuario.getDoacao();
-            telaHistorico.historicoSuperUsuario(nome, adocao, doacao, mapeador.getList());
+            telaUsuario.historicoSuperUsuario(nome, adocao, doacao, mapeador.getList());
         } else {
             ArrayList<Animal> adocao = usuario.getAdocao();
             ArrayList<Animal> doacao = usuario.getDoacao();
-            telaHistorico.historico(nome, adocao, doacao);
+            telaUsuario.historico(nome, adocao, doacao);
         }
     }
 
@@ -120,51 +122,51 @@ public final class ControladorUsuario {
     public void mudarSenha(String senha) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.setSenha(senha);
-        mapeador.persist();
+        mapeador.put(usuario);
         ControladorPrincipal.getInstancia().menu();
     }
 
     public void mudarNome(String nome) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.setNome(nome);
-        mapeador.persist();
+        mapeador.put(usuario);
         ControladorPrincipal.getInstancia().menu();
     }
 
     public void adocaoCachorro(Cachorro cachorro) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.registroCachorro(cachorro);
-        mapeador.persist();
+        mapeador.put(usuario);
     }
 
     public void adocaoGato(Gato gato) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.registroGato(gato);
-        mapeador.persist();
+        mapeador.put(usuario);
     }
 
     public void adocaoPassaro(Passaro passaro) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.registroPassaro(passaro);
-        mapeador.persist();
+        mapeador.put(usuario);
     }
 
     public void doaCachorro(Cachorro cachorro) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.doaCachorro(cachorro);
-        mapeador.persist();
+        mapeador.put(usuario);
     }
 
     public void doaGato(Gato gato) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.doaGato(gato);
-        mapeador.persist();
+        mapeador.put(usuario);
     }
 
     public void doaPassaro(Passaro passaro) {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         usuario.doaPassaro(passaro);
-        mapeador.persist();
+        mapeador.put(usuario);
     }
 
     public ArrayList<Animal> enviaListaAdocao() {
