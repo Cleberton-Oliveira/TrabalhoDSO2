@@ -31,8 +31,12 @@ public class Menu extends JFrame implements ActionListener{
         Container container = getContentPane();
         container.setLayout(new GridBagLayout()); 
         GridBagConstraints c = new GridBagConstraints();
-
-        lbTexto = new JLabel("MENU PRINCIPAL");
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 10;
+        c.gridwidth = 3;
+        
+        lbTexto = new JLabel(" --- MENU PRINCIPAL ---");
         c.gridx = 0;
         c.gridy = 0;
         container.add(lbTexto, c);
@@ -73,7 +77,7 @@ public class Menu extends JFrame implements ActionListener{
         btApagarConta.addActionListener(this);
         container.add(btApagarConta, c);
 
-        setSize(460, 250);
+        setSize(460, 290);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

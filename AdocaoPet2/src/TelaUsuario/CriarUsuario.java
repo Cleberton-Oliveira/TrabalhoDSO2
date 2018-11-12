@@ -34,61 +34,74 @@ public class CriarUsuario extends JFrame implements ActionListener{
         container.setLayout(new GridBagLayout());    
         GridBagConstraints c = new GridBagConstraints();
         
+                
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 10;
+       
             
-        texto = new JLabel("Login");
+        texto = new JLabel("       --  Criar Conta  -- ");
         c.gridx =0;
         c.gridy =0;
+        c.gridwidth = 2;
         container.add(texto, c);  
          
         
         texto = new JLabel("Nome: ");
         c.gridx =0;
         c.gridy =1;
+        c.gridwidth = 1;
         container.add(texto, c);
         
         
         texto = new JLabel("CPF: ");
         c.gridx =0;
         c.gridy =2;
+         c.gridwidth = 1;
         container.add(texto, c);  
         
         texto = new JLabel("Senha: ");
         c.gridx =0;
         c.gridy =3;
+         c.gridwidth = 1;
         container.add(texto, c);  
         
         
-        nome = new JTextField("Digite seu nome");
+        nome = new JTextField();
         c.gridx =1;
         c.gridy =1;
+         c.gridwidth = 1;
         container.add(nome, c); 
 
         
-        cpf = new JTextField("Digite seu cpf");
+        cpf = new JTextField();
         c.gridx =1;
         c.gridy =2;
+         c.gridwidth = 1;
         container.add(cpf, c); 
 
            
-        senha = new JPasswordField("Digite sua senha");
+        senha = new JPasswordField();
         c.gridx =1;
         c.gridy =3;
+         c.gridwidth = 1;
         container.add(senha, c); 
 
       
         btSair = new JButton("Sair");
         c.gridx = 0;
         c.gridy = 4;
+         c.gridwidth = 1;
         btSair.addActionListener(this); 
         container.add(btSair, c);
         
         btEnviar = new JButton("Enviar");
         c.gridx = 1;
         c.gridy = 4;
+         c.gridwidth = 1;
         btEnviar.addActionListener(this);
         container.add(btEnviar, c);
           
-        setSize(700, 370);
+        setSize(460, 290);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

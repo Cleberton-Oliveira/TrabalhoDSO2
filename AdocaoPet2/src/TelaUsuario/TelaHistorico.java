@@ -49,7 +49,7 @@ public class TelaHistorico extends JFrame implements ActionListener {
     
     public void historicoSuperUsuario(String nome, ArrayList<Animal> adocao,
             ArrayList<Animal> doacao, ArrayList<Usuario> list) {
-       
+        
 
     }
 

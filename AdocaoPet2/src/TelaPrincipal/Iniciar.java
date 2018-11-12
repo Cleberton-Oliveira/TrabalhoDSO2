@@ -31,28 +31,29 @@ public class Iniciar extends JFrame implements ActionListener {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        lbTexto = new JLabel("Bem Vindo ao controlador Principal");
+        lbTexto = new JLabel("Bem Vindo ao Doação de Pet");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 20; // faz este componente alto
+        c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 0;
         container.add(lbTexto, c);
 
-//        tfNome = new JTextField();
-//        c.gridx = 1;
-//        c.gridy = 0;
-//        container.add(tfNome, c);
         btEntrar = new JButton("Entrar");
-        c.gridx = 0;
+        c.gridx = 1;
         c.gridy = 1;
+        c.gridwidth = 1;
         btEntrar.addActionListener(this);
         container.add(btEntrar, c);
 
         btCriarConta = new JButton("Criar Conta");
-        c.gridx = 1;
+        c.gridx = 0;
         c.gridy = 1;
+        c.gridwidth = 1;
         btCriarConta.addActionListener(this);
         container.add(btCriarConta, c);
 
-        setSize(460, 250);
+        setSize(460, 290);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

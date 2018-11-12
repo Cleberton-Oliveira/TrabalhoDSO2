@@ -33,14 +33,20 @@ public class Login extends JFrame implements ActionListener{
         container.setLayout(new GridBagLayout());    
         GridBagConstraints c = new GridBagConstraints();
         
-        texto = new JLabel("Login");
+                
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 10;      
+        
+        texto = new JLabel("       -- LOGIN --");
         c.gridx =0;
         c.gridy =0;
+        c.gridwidth = 2;
         container.add(texto, c);  
                 
         texto = new JLabel("CPF: ");
         c.gridx =0;
         c.gridy =1;
+        c.gridwidth = 1;
         container.add(texto, c);  
         
         texto = new JLabel("Senha: ");
@@ -48,12 +54,12 @@ public class Login extends JFrame implements ActionListener{
         c.gridy =2;
         container.add(texto, c);  
                 
-        cpf = new JTextField("123");
+        cpf = new JTextField();
         c.gridx =1;
         c.gridy =1;
         container.add(cpf, c); 
                    
-        senha = new JPasswordField("123");
+        senha = new JPasswordField();
         c.gridx =1;
         c.gridy =2;
         container.add(senha, c);
@@ -70,7 +76,7 @@ public class Login extends JFrame implements ActionListener{
         btEntrar.addActionListener(this);
         container.add(btEntrar, c);
           
-        setSize(700, 370);
+        setSize(460, 290);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

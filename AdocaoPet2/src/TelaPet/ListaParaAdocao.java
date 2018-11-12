@@ -58,9 +58,9 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
            
             for (ConteudoTelaPet conteudoTela : listagemPets){
                 
-                String petParaAdocao =  "PET:  NOME:  " + conteudoTela.nomePet + "   ||   IDADE: " + conteudoTela.idadePet  +"  || CODIGO: " + conteudoTela.identificador;
+                String petParaAdocao =  "NOME:  " + conteudoTela.nomePet + " || IDADE: " + conteudoTela.idadePet  +" || CODIGO: " + conteudoTela.identificador;
                 id.add(conteudoTela.identificador);
-                
+          
                pets.add(petParaAdocao);
             }
             
@@ -69,6 +69,9 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
             animal.setSelectedIndex(0);
             c.gridx = 0;
             c.gridy = 1;
+            c.ipady = 15;
+           
+            
             animal.addActionListener(this);
             container.add(animal, c);   
              
@@ -82,13 +85,14 @@ public class ListaParaAdocao extends JFrame implements ActionListener{
             btCancel = new JButton("Não adotar nenhum");
             c.gridx = 0;
             c.gridy = 2;
+            c.ipady = 10;
             btCancel.addActionListener(this);
             container.add(btCancel, c);
             
             
         }
         
-        setSize(460, 250);
+        setSize(490, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
