@@ -6,6 +6,8 @@ import Entidade.ConteudoTelaPet;
 import Entidade.Cachorro;
 import Entidade.Gato;
 import Entidade.Passaro;
+import Exception.MaximoDaMesmaEspecieException;
+import Exception.MaximoDeAnimaisAdotadosException;
 import Mapeadores.MapeadorCachorro;
 import Mapeadores.MapeadorGato;
 import Mapeadores.MapeadorPassaro;
@@ -14,6 +16,7 @@ import TelaPet.ListaParaAdocao;
 import java.util.ArrayList;
 
 public final class ControladorPet {
+
     private static ControladorPet instancia;
     private AdotaPet adotaPet;
     private DoarPet doarPet;
@@ -22,7 +25,6 @@ public final class ControladorPet {
     private MapeadorGato mapeadorGato;
     private MapeadorPassaro mapeadorPassaro;
     private final int CACHORRO = 1, GATO = 2, PASSARO = 3;
-
 
     private ControladorPet() {
         this.adotaPet = new AdotaPet();
@@ -149,19 +151,17 @@ public final class ControladorPet {
         return adocoes;
     }
 
-    public void petAdotado(String id, int pet) {
+    public void petAdotado(String id, int pet) throws MaximoDeAnimaisAdotadosException, MaximoDaMesmaEspecieException {
         ArrayList<Animal> animal = adocoesUsuario();
         if (adocoesUsuario().size() > 4) {
-            listaParaAdocao.exibeMaximoAdocao();
-            return;
+            throw new MaximoDeAnimaisAdotadosException();
         } else {
             switch (pet) {
                 case CACHORRO:
                     Cachorro cachorro = mapeadorCachorro.getCachorro(id);
                     for (Animal adocao : animal) {
                         if (adocao.getEspecie() == cachorro.getEspecie()) {
-                            listaParaAdocao.exibeMaximoEspecie();
-                            return;
+                            throw new MaximoDaMesmaEspecieException();
                         }
                     }
                     ControladorPrincipal.getInstancia().adocaoCachorro(cachorro);
@@ -173,8 +173,7 @@ public final class ControladorPet {
                     Gato gato = mapeadorGato.getGato(id);
                     for (Animal adocao : animal) {
                         if (adocao.getEspecie() == gato.getEspecie()) {
-                            listaParaAdocao.exibeMaximoEspecie();
-                            return;
+                            throw new MaximoDaMesmaEspecieException();
                         }
                     }
                     ControladorPrincipal.getInstancia().adocaoGato(gato);
@@ -186,8 +185,7 @@ public final class ControladorPet {
                     Passaro passaro = mapeadorPassaro.getPassaro(id);
                     for (Animal adocao : animal) {
                         if (adocao.getEspecie() == passaro.getEspecie()) {
-                            listaParaAdocao.exibeMaximoEspecie();
-                            return;
+                            throw new MaximoDaMesmaEspecieException();
                         }
                     }
                     ControladorPrincipal.getInstancia().adocaoPassaro(passaro);

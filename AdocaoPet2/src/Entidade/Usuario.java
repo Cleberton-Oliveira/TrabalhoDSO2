@@ -37,6 +37,7 @@ public class Usuario implements IUsuario, Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
     @Override
     public String getCpf() {
         return cpf;

@@ -57,7 +57,7 @@ public class EditarDados extends JFrame implements ActionListener {
         c.gridy = 2;
         btSenha.addActionListener(this);
         container.add(btSenha, c);
-
+       
         setSize(460, 290);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -112,7 +112,7 @@ public class EditarDados extends JFrame implements ActionListener {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 10;
 
-        texto = new JLabel("  -- Nova senha --");
+        texto = new JLabel("  -- Nova senha --  ");
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = 2;
@@ -145,6 +145,7 @@ public class EditarDados extends JFrame implements ActionListener {
 
     }
 
+
     public void exibe() {
         setVisible(true);
     }
@@ -164,7 +165,7 @@ public class EditarDados extends JFrame implements ActionListener {
             btNome.setVisible(false);
             btSenha.setVisible(false);
             titulo.setVisible(false);
-            editaSenha();
+            editaSenha();       
         } else if (e.getSource().equals(btSair)) {
             fecha();
             ControladorUsuario.getInstance().telaPrincipal();
@@ -174,9 +175,8 @@ public class EditarDados extends JFrame implements ActionListener {
             ControladorUsuario.getInstance().mudarSenha(senha.getText());
         } else if (e.getSource().equals(btEditaNome)) {
             fecha();
-            JOptionPane.showMessageDialog(null, "Nome editada com sucesso");
-            ControladorUsuario.getInstance().mudarSenha(nome.getText());
+            JOptionPane.showMessageDialog(null, "Nome editado com sucesso");
+            ControladorUsuario.getInstance().mudarNome(nome.getText());
         }
     }
-
 }

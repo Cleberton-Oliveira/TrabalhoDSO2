@@ -22,7 +22,7 @@ public final class ControladorPrincipal{
         this.menu = new Menu();
     }
 
-    public static synchronized ControladorPrincipal getInstancia() {
+    public static ControladorPrincipal getInstancia() {
         if (instancia == null) {
             instancia = new ControladorPrincipal();
         }

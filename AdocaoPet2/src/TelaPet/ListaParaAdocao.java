@@ -15,8 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Entidade.Cachorro;
+import Exception.MaximoDaMesmaEspecieException;
+import Exception.MaximoDeAnimaisAdotadosException;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 
 public class ListaParaAdocao extends JFrame implements ActionListener {
@@ -40,7 +44,7 @@ public class ListaParaAdocao extends JFrame implements ActionListener {
 
         c.gridwidth = 2;
 
-        lbTexto = new JLabel("                               -- >> LISTAGEM PARA A ADOÇÃO << --");
+        lbTexto = new JLabel("                            -- >> LISTAGEM PARA A ADOÇÃO << --");
         c.gridx = 0;
         c.gridy = 0;
         container.add(lbTexto, c);
@@ -68,29 +72,28 @@ public class ListaParaAdocao extends JFrame implements ActionListener {
                 pets.add(petParaAdocao);
             }
 
-
             animal = new JComboBox(pets.toArray());
             animal.setSelectedIndex(0);
-              c.ipady = 4;  
+            c.ipady = 4;
             c.gridx = 0;
             c.gridy = 1;
             c.ipady = 12;
-             c.gridwidth = 1;
+            c.gridwidth = 1;
             animal.addActionListener(this);
             container.add(animal, c);
 
             btOk = new JButton("Adotar");
-            
+
             c.gridy = 1;       //third row
-            c.gridx = 1;  
+            c.gridx = 1;
             c.gridwidth = 1;
             btOk.addActionListener(this);
             container.add(btOk, c);
 
             btCancel = new JButton("Não adotar nenhum");
-            c.ipady = 4;   
-            c.insets = new Insets(40, 0, 0, 0);   
-            c.gridwidth = 2; 
+            c.ipady = 4;
+            c.insets = new Insets(40, 0, 0, 0);
+            c.gridwidth = 2;
             c.gridx = 0;
             c.gridy = 2;
             btCancel.addActionListener(this);
@@ -114,9 +117,20 @@ public class ListaParaAdocao extends JFrame implements ActionListener {
 
         } else if (e.getSource().equals(btOk)) {
             fecha();
-            ControladorPet.getInstance().petAdotado(id.get(animal.getSelectedIndex()), valorPet);
-        }
+            try {
+                ControladorPet.getInstance().petAdotado(id.get(animal.getSelectedIndex()), valorPet);
+            } catch (MaximoDaMesmaEspecieException ex) {
+                System.out.println(ex);
+                JOptionPane.showMessageDialog(null, "ERRO\n Você já adotou o numero maximo para essa especie");
+                ControladorPet.getInstance().menuPrincipal();
 
+            } catch (MaximoDeAnimaisAdotadosException ex) {
+                System.out.println(ex);
+                JOptionPane.showMessageDialog(null, "ERRO\n Você já adotou o numero maximo que o sistema permite");
+                ControladorPet.getInstance().menuPrincipal();
+
+            }
+        }
     }
 
     public void fecha() {
@@ -125,16 +139,6 @@ public class ListaParaAdocao extends JFrame implements ActionListener {
 
     public void exibeSucessoAdocao(String pet) {
         JOptionPane.showMessageDialog(null, "PARABÉNS\n Pet " + pet + " adotado com sucesso.");
-        ControladorPet.getInstance().menuPrincipal();
-    }
-
-    public void exibeMaximoEspecie() {
-        JOptionPane.showMessageDialog(null, "ERRO\n Você já adotou o numero maximo para essa especie");
-        ControladorPet.getInstance().menuPrincipal();
-    }
-
-    public void exibeMaximoAdocao() {
-        JOptionPane.showMessageDialog(null, "ERRO\n Você já adotou o numero maximo que o sistema permite");
         ControladorPet.getInstance().menuPrincipal();
     }
 }
