@@ -12,7 +12,6 @@ import TelaUsuario.CriarUsuario;
 import TelaUsuario.EditarDados;
 import TelaUsuario.HistoricoSuperUser;
 import TelaUsuario.Login;
-import TelaUsuario.TelaUsuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -25,7 +24,6 @@ public final class ControladorUsuario {
     private CriarUsuario criarUsuario;
     private EditarDados editarDados;
     private TelaHistorico telaHistorico;
-    private TelaUsuario telaUsuario;
     private HistoricoSuperUser historicoSuperUsuario;
     
     private ControladorUsuario() {
@@ -35,7 +33,6 @@ public final class ControladorUsuario {
         this.editarDados = new EditarDados();
         this.telaHistorico = new TelaHistorico();
         this.historicoSuperUsuario = new HistoricoSuperUser();
-        this.telaUsuario = new TelaUsuario(this);
     }
     
     public static synchronized ControladorUsuario getInstance() {
@@ -57,8 +54,7 @@ public final class ControladorUsuario {
         criarUsuario.exibe();
     }
     
-    public void logar(String loginUsuario) {
-        
+    public void logar(String loginUsuario) {     
         for (Usuario usuario : mapeador.getList()) {
             String loginDeUsuarios = usuario.getLogin();
             if (loginDeUsuarios.equals(loginUsuario)) {
@@ -90,7 +86,7 @@ public final class ControladorUsuario {
                 criarUsuario.fecha();
                 criarUsuario.erro();
                 return;
-            } else if (cpf.length() != 3) {
+             }else if (cpf.length() != 3 || !cpf.matches("[0-9]+")){
                 criarUsuario.erro();
                 return;
             }
@@ -129,7 +125,6 @@ public final class ControladorUsuario {
         ArrayList<Animal> doacao = usuario.getDoacao();
         telaHistorico = new TelaHistorico();
         telaHistorico.historico(nome, adocao, doacao);
-        telaUsuario.historico(nome, adocao, doacao);
     }
     
     public void telaPrincipal() {

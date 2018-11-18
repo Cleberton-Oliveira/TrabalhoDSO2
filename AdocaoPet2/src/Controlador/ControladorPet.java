@@ -13,6 +13,7 @@ import Mapeadores.MapeadorGato;
 import Mapeadores.MapeadorPassaro;
 import TelaPet.AdotaPet;
 import TelaPet.ListaParaAdocao;
+import java.rmi.server.UID;
 import java.util.ArrayList;
 
 public final class ControladorPet {
@@ -92,7 +93,7 @@ public final class ControladorPet {
     }
 
     public void cadastroDog(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = "idCachorro:" + Integer.toString(mapeadorCachorro.getList().size());
+        conteudoTela.identificador = new UID().toString();
         System.out.println("O indentificador do cachorro é: " + conteudoTela.identificador);
         Cachorro cachorro = desempacotaCachorro(conteudoTela);
         mapeadorCachorro.put(cachorro);
@@ -101,7 +102,7 @@ public final class ControladorPet {
     }
 
     public void cadastroGato(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = "idGato:" + Integer.toString(mapeadorGato.getList().size());
+        conteudoTela.identificador = new UID().toString();
         System.out.println("O indentificador do gato é: " + conteudoTela.identificador);
         Gato gato = desempacotaGato(conteudoTela);
         mapeadorGato.put(gato);
@@ -110,7 +111,7 @@ public final class ControladorPet {
     }
 
     public void cadastroPassaro(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = "idPassaro:" + Integer.toString(mapeadorPassaro.getList().size());
+        conteudoTela.identificador = new UID().toString();
         System.out.println("O indentificador do passaro é: " + conteudoTela.identificador);
         Passaro passaro = desempacotaPassaro(conteudoTela);
         mapeadorPassaro.put(passaro);
