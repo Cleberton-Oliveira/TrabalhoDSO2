@@ -94,7 +94,6 @@ public final class ControladorPet {
 
     public void cadastroDog(ConteudoTelaPet conteudoTela) {
         conteudoTela.identificador = geradorCodigo(CACHORRO);
-        System.out.println("O indentificador do cachorro é: " + conteudoTela.identificador);
         Cachorro cachorro = desempacotaCachorro(conteudoTela);
         mapeadorCachorro.put(cachorro);
         ControladorPrincipal.getInstancia().doaCachorro(cachorro);
@@ -103,7 +102,6 @@ public final class ControladorPet {
 
     public void cadastroGato(ConteudoTelaPet conteudoTela) {
         conteudoTela.identificador = geradorCodigo(GATO);
-        System.out.println("O indentificador do gato é: " + conteudoTela.identificador);
         Gato gato = desempacotaGato(conteudoTela);
         mapeadorGato.put(gato);
         ControladorPrincipal.getInstancia().doaGato(gato);
@@ -112,7 +110,6 @@ public final class ControladorPet {
 
     public void cadastroPassaro(ConteudoTelaPet conteudoTela) {
         conteudoTela.identificador = geradorCodigo(PASSARO);
-        System.out.println("O indentificador do passaro é: " + conteudoTela.identificador);
         Passaro passaro = desempacotaPassaro(conteudoTela);
         mapeadorPassaro.put(passaro);
         ControladorPrincipal.getInstancia().doaPassaro(passaro);
@@ -168,7 +165,6 @@ public final class ControladorPet {
                     ControladorPrincipal.getInstancia().adocaoCachorro(cachorro);
                     mapeadorCachorro.remove(cachorro);
                     listaParaAdocao.exibeSucessoAdocao(cachorro.getNome());
-                    System.out.print(cachorro.getIdentificadorCachorro());
                     return;
                 case GATO:
                     Gato gato = mapeadorGato.getGato(id);
@@ -180,7 +176,7 @@ public final class ControladorPet {
                     ControladorPrincipal.getInstancia().adocaoGato(gato);
                     mapeadorGato.remove(gato);
                     listaParaAdocao.exibeSucessoAdocao(gato.getNome());
-                    System.out.print(gato.getIdentificadorGato());
+
                     return;
                 case PASSARO:
                     Passaro passaro = mapeadorPassaro.getPassaro(id);
@@ -191,8 +187,7 @@ public final class ControladorPet {
                     }
                     ControladorPrincipal.getInstancia().adocaoPassaro(passaro);
                     mapeadorPassaro.remove(passaro);
-                    listaParaAdocao.exibeSucessoAdocao(passaro.getNome());
-                    System.out.print(passaro.getIdentificadorPassaro());
+                    listaParaAdocao.exibeSucessoAdocao(passaro.getNome()); 
                     return;
             }
         }
