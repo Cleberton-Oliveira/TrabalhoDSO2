@@ -362,6 +362,7 @@ public class DoarPet extends JFrame implements ActionListener {
             animal = 3;
 
         } else if (e.getSource().equals(btOk)) {
+           
             ConteudoTelaPet conteudoTela = new ConteudoTelaPet();
             conteudoTela.racaPet = raca.getSelectedIndex() + 1;
             conteudoTela.sexoPet = sexo.getSelectedIndex() + 1;

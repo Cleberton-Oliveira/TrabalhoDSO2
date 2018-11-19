@@ -93,7 +93,7 @@ public final class ControladorPet {
     }
 
     public void cadastroDog(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = new UID().toString();
+        conteudoTela.identificador = geradorCodigo(CACHORRO);
         System.out.println("O indentificador do cachorro é: " + conteudoTela.identificador);
         Cachorro cachorro = desempacotaCachorro(conteudoTela);
         mapeadorCachorro.put(cachorro);
@@ -102,7 +102,7 @@ public final class ControladorPet {
     }
 
     public void cadastroGato(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = new UID().toString();
+        conteudoTela.identificador = geradorCodigo(GATO);
         System.out.println("O indentificador do gato é: " + conteudoTela.identificador);
         Gato gato = desempacotaGato(conteudoTela);
         mapeadorGato.put(gato);
@@ -111,7 +111,7 @@ public final class ControladorPet {
     }
 
     public void cadastroPassaro(ConteudoTelaPet conteudoTela) {
-        conteudoTela.identificador = new UID().toString();
+        conteudoTela.identificador = geradorCodigo(PASSARO);
         System.out.println("O indentificador do passaro é: " + conteudoTela.identificador);
         Passaro passaro = desempacotaPassaro(conteudoTela);
         mapeadorPassaro.put(passaro);
@@ -196,5 +196,55 @@ public final class ControladorPet {
                     return;
             }
         }
+    }
+
+    private String geradorCodigo(int pet) {
+        int i = 0;
+        String id = "";
+        switch (pet) {
+            case CACHORRO:
+                if (mapeadorCachorro.getList().isEmpty()) {
+                    return "Cachorro: " + i;
+                } else {
+                    for (int j = 0; j <= mapeadorCachorro.getList().size(); j++) {
+                        id = "Cachorro: " + i;
+                        for (Cachorro cachorro : mapeadorCachorro.getList()) {
+                            if (id.equals(cachorro.getIdentificadorCachorro())) {
+                                i++;
+                            }
+                        }
+                    }
+                    return id;
+                }
+            case GATO:
+                if (mapeadorGato.getList().isEmpty()) {
+                    return "Gato: " + i;
+                } else {
+                    for (int j = 0; j <= mapeadorGato.getList().size(); j++) {
+                        id = "Gato: " + i;
+                        for (Gato gato : mapeadorGato.getList()) {
+                            if (id.equals(gato.getIdentificadorGato())) {
+                                i++;
+                            }
+                        }
+                    }
+                    return id;
+                }
+            case PASSARO:
+                if (mapeadorPassaro.getList().isEmpty()) {
+                    return "Passaro: " + i;
+                } else {
+                    for (int j = 0; j <= mapeadorPassaro.getList().size(); j++) {
+                        id = "Passaro: " + i;
+                        for (Passaro passaro : mapeadorPassaro.getList()) {
+                            if (id.equals(passaro.getIdentificadorPassaro())) {
+                                i++;
+                            }
+                        }
+                    }
+                    return id;
+                }    
+        }
+        return null;
     }
 }

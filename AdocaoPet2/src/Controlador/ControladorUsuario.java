@@ -14,6 +14,7 @@ import TelaUsuario.HistoricoSuperUser;
 import TelaUsuario.Login;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import Entidade.ConteudoTelaHistorico;
 
 public final class ControladorUsuario {
 
@@ -106,6 +107,8 @@ public final class ControladorUsuario {
         return new ConteudoTelaUsuario(usuario.getNome(), usuario.getCpf(), usuario.getSenha());
     }
     
+
+    
     public void historicoUsuario() {
         Usuario usuario = mapeador.getUsuario(cpfLogado);
         if (usuario.getSuperuser() == true) {
@@ -120,11 +123,12 @@ public final class ControladorUsuario {
     
     public void imprimeHistorico(String cpf) {
         Usuario usuario = mapeador.getUsuario(cpf);
-        String nome = usuario.getNome();
-        ArrayList<Animal> adocao = usuario.getAdocao();
-        ArrayList<Animal> doacao = usuario.getDoacao();
+        ConteudoTelaHistorico conteudoTela = new ConteudoTelaHistorico();
+        conteudoTela.nome = usuario.getNome();
+        conteudoTela.adocao = usuario.getAdocao();
+        conteudoTela.doacao = usuario.getDoacao();
         telaHistorico = new TelaHistorico();
-        telaHistorico.historico(nome, adocao, doacao);
+        telaHistorico.historico(conteudoTela);
     }
     
     public void telaPrincipal() {

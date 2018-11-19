@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import Entidade.Usuario;
 import Entidade.Animal;
+import Entidade.ConteudoTelaHistorico;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -27,7 +28,7 @@ public class TelaHistorico extends JFrame implements ActionListener {
     JTable table;
     JButton button;
 
-    public void historico(String nome, ArrayList<Animal> adocao, ArrayList<Animal> doacao) {
+    public void historico(ConteudoTelaHistorico conteudoTela) {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -38,7 +39,7 @@ public class TelaHistorico extends JFrame implements ActionListener {
         c.gridy = 1;
         container.add(label, c);
 
-        if (adocao.isEmpty()) {
+        if (conteudoTela.adocao.isEmpty()) {
 
             label = new JLabel("Você ainda não adotou nenhum ");
             c.gridx = 0;
@@ -52,7 +53,7 @@ public class TelaHistorico extends JFrame implements ActionListener {
             conteudoAdocao.addColumn("SEXO");
             conteudoAdocao.addColumn("ESPECIE");
 
-            for (Animal pet : adocao) {
+            for (Animal pet : conteudoTela.adocao) {
                 conteudoAdocao.addRow(new Object[]{pet.getNome(), pet.getIdade(), pet.getNomeSexo(pet.getSexo()), pet.getEspecie()});
             }
 
@@ -93,7 +94,7 @@ public class TelaHistorico extends JFrame implements ActionListener {
         c.gridy = 3;
         container.add(label, c);
 
-        if (doacao.isEmpty()) {
+        if (conteudoTela.doacao.isEmpty()) {
 
             label = new JLabel("Você ainda não doou nenhum ");
             c.gridx = 0;
@@ -107,7 +108,7 @@ public class TelaHistorico extends JFrame implements ActionListener {
             conteudoDoacao.addColumn("SEXO");
             conteudoDoacao.addColumn("ESPECIE");
 
-            for (Animal pet : doacao) {
+            for (Animal pet : conteudoTela.doacao) {
                 conteudoDoacao.addRow(new Object[]{pet.getNome(), pet.getIdade(), pet.getNomeSexo(pet.getSexo()), pet.getEspecie()});
             }
 
@@ -148,7 +149,7 @@ public class TelaHistorico extends JFrame implements ActionListener {
         button.addActionListener(this);
         add(button, c);
 
-        setTitle("Historico " + nome);
+        setTitle("Historico " + conteudoTela.nome);
         setSize(460, 290);
         setLocationRelativeTo(null); // Aparece a jframe no meio da tela
         setVisible(true);
